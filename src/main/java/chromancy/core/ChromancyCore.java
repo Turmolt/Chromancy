@@ -55,16 +55,16 @@ public class ChromancyCore {
 	{
 		//Initialize and register blocks here
 		prismOre = new BlockPrismOre();
-		prismDust = new PrismDust();
-		prismShard = new PrismShard();
-		prismCore = new PrismCore();
-		blueLumingot = new BlueLumingot();
-		redLumingot = new RedLumingot();
-		orangeLumingot = new OrangeLumingot();
-		yellowLumingot = new YellowLumingot();
-		greenLumingot = new GreenLumingot();
-		indigoLumingot = new IndigoLumingot();
-		violetLumingot = new VioletLumingot();
+		prismDust = new BasicItem(64, "prismDust");
+		prismShard = new BasicItem(64, "prismShard");
+		prismCore = new BasicItem(64, "prismCore");
+		blueLumingot = new Lumingot(64, "blueLumingot");
+		redLumingot = new Lumingot(64, "redLumingot");
+		orangeLumingot = new Lumingot(64, "orangeLumingot");
+		yellowLumingot = new Lumingot(64, "yellowLumingot");
+		greenLumingot = new Lumingot(64, "greenLumingot");
+		indigoLumingot = new Lumingot(64, "indigoLumingot");
+		violetLumingot = new Lumingot(64, "violetLumingot");
 		
 		RegisterHelper.registerBlock(prismOre);
 		RegisterHelper.registerItem(prismDust);
@@ -87,6 +87,7 @@ public class ChromancyCore {
 		
 		//Crafting
 		GameRegistry.addRecipe(new ItemStack(prismCore), " x ","x x"," x ",'x', prismShard);
+
 	}
 	
 	@EventHandler

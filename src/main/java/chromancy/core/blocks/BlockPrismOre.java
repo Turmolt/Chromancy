@@ -23,6 +23,7 @@ public class BlockPrismOre extends Block {
 		setHarvestLevel("pickaxe",0);
 	}
 	
+
 	//Specify what is dropped
 	public Item getItemDropped(int metadeta, Random random, int fortune){
 		return ChromancyCore.prismDust;
