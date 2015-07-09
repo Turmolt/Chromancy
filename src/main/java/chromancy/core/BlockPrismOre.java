@@ -1,9 +1,11 @@
 package chromancy.core;
 
-import chromancy.core.help.Reference;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import chromancy.core.help.Reference;
 
 public class BlockPrismOre extends Block {
 
@@ -18,5 +20,29 @@ public class BlockPrismOre extends Block {
 		setResistance(5.0f);
 		setLightLevel(1.0f);
 		setHarvestLevel("pickaxe",0);
+	}
+	
+	//Specify what is dropped
+	public Item getItemDropped(int metadeta, Random random, int fortune){
+		return ChromancyCore.prismDust;
+	}
+	
+	
+	/**
+	 * 100% Chance to drop at least one Prism dust
+	 * 50% Chance to drop a second Prism dust
+	 * 10% Chance to drop a third Prism dust
+	 */
+	public int quantityDropped(Random rand){
+		int num = 1;
+		float r = rand.nextFloat();
+		if(r <= 0.5f){
+			num+=1;
+			if(r<=0.1f)
+				num+=1;
+		}
+		return num;
+		
+		
 	}
 }
