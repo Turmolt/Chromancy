@@ -40,6 +40,13 @@ public class ChromancyCore {
 	public static Item prismDust;
 	public static Item prismShard;
 	public static Item prismCore;
+	public static Item blueLumingot;
+	public static Item redLumingot;
+	public static Item yellowLumingot;
+	public static Item indigoLumingot;
+	public static Item violetLumingot;
+	public static Item orangeLumingot;
+	public static Item greenLumingot;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -49,11 +56,25 @@ public class ChromancyCore {
 		prismDust = new PrismDust();
 		prismShard = new PrismShard();
 		prismCore = new PrismCore();
+		blueLumingot = new BlueLumingot();
+		redLumingot = new RedLumingot();
+		orangeLumingot = new OrangeLumingot();
+		yellowLumingot = new YellowLumingot();
+		greenLumingot = new GreenLumingot();
+		indigoLumingot = new IndigoLumingot();
+		violetLumingot = new VioletLumingot();
 		
 		RegisterHelper.registerBlock(prismOre);
 		RegisterHelper.registerItem(prismDust);
 		RegisterHelper.registerItem(prismShard);
 		RegisterHelper.registerItem(prismCore);
+		RegisterHelper.registerItem(blueLumingot);
+		RegisterHelper.registerItem(redLumingot);
+		RegisterHelper.registerItem(yellowLumingot);
+		RegisterHelper.registerItem(violetLumingot);
+		RegisterHelper.registerItem(indigoLumingot);
+		RegisterHelper.registerItem(greenLumingot);
+		RegisterHelper.registerItem(orangeLumingot);
 	}
 	
 	@EventHandler
