@@ -1,10 +1,11 @@
-package chromancy.core;
+package chromancy.core.blocks;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import chromancy.core.ChromancyCore;
 import chromancy.core.help.Reference;
 
 public class BlockPrismOre extends Block {

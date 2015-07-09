@@ -1,5 +1,6 @@
-package chromancy.core;
+package chromancy.core.items;
 
+import chromancy.core.ChromancyCore;
 import net.minecraft.item.Item;
 
 public class RedLumingot extends Item {
