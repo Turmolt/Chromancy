@@ -12,6 +12,11 @@ public class BlockPrismOre extends Block {
 		super(Material.rock);
 		setBlockName("prismOre");
 		setBlockTextureName(Reference.MODID + ":" + getUnlocalizedName().substring(5));
-		setCreativeTab(CreativeTabs.tabBlock);
+		setCreativeTab(ChromancyCore.chromancyTab);
+		setStepSound(soundTypeGlass);
+		setHardness(2.0f);
+		setResistance(5.0f);
+		setLightLevel(1.0f);
+		setHarvestLevel("pickaxe",0);
 	}
 }
