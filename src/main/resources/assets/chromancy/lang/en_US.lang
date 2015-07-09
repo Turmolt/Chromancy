@@ -1,9 +1,12 @@
 tile.prismOre.name=Prism Ore
 itemGroup.Chromancy=Chromancy
+item.essenceOfPureLight.name=Essence of Pure Light
+item.basicPrism.name=Basic Prism
 item.prismDust.name=Prism Dust
 item.lumingot.name=Lumingot
 item.prismShard.name=Prism Shard
 item.prismCore.name=Prism Core
+item.paleLumingot.name=Pale Lumingot
 item.redLumingot.name=Red Lumingot
 item.yellowLumingot.name=Yellow Lumingot
 item.blueLumingot.name=Blue Lumingot

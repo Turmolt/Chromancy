@@ -39,9 +39,12 @@ public class ChromancyCore {
 	public static Block prismOre;
 	
 	//Declare Items
+	public static Item essenceOfPureLight;
+	public static Item basicPrism;
 	public static Item prismDust;
 	public static Item prismShard;
 	public static Item prismCore;
+	public static Item paleLumingot;
 	public static Item blueLumingot;
 	public static Item redLumingot;
 	public static Item yellowLumingot;
@@ -53,11 +56,18 @@ public class ChromancyCore {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		//Initialize and register blocks here
+		// Initialize and register Blocks here
 		prismOre = new BlockPrismOre();
+		
+		RegisterHelper.registerBlock(prismOre);
+		
+		// Initialize and register Items here
+		essenceOfPureLight = new BasicItem(64, "essenceOfPureLight");
+		basicPrism = new BasicItem(64, "basicPrism");
 		prismDust = new BasicItem(64, "prismDust");
 		prismShard = new BasicItem(64, "prismShard");
 		prismCore = new BasicItem(64, "prismCore");
+		paleLumingot = new Lumingot(64, "paleLumingot");
 		blueLumingot = new Lumingot(64, "blueLumingot");
 		redLumingot = new Lumingot(64, "redLumingot");
 		orangeLumingot = new Lumingot(64, "orangeLumingot");
@@ -66,10 +76,12 @@ public class ChromancyCore {
 		indigoLumingot = new Lumingot(64, "indigoLumingot");
 		violetLumingot = new Lumingot(64, "violetLumingot");
 		
-		RegisterHelper.registerBlock(prismOre);
+		RegisterHelper.registerItem(basicPrism);
+		RegisterHelper.registerItem(essenceOfPureLight);
 		RegisterHelper.registerItem(prismDust);
 		RegisterHelper.registerItem(prismShard);
 		RegisterHelper.registerItem(prismCore);
+		RegisterHelper.registerItem(paleLumingot);
 		RegisterHelper.registerItem(blueLumingot);
 		RegisterHelper.registerItem(redLumingot);
 		RegisterHelper.registerItem(yellowLumingot);
@@ -87,6 +99,8 @@ public class ChromancyCore {
 		
 		//Crafting
 		GameRegistry.addRecipe(new ItemStack(prismCore), " x ","x x"," x ",'x', prismShard);
+		GameRegistry.addRecipe(new ItemStack(basicPrism), "xx ","xx ","xx ",'x', prismShard);
+		GameRegistry.addRecipe(new ItemStack(paleLumingot), "xxx","xxx","   ",'x', prismShard);
 
 	}
 	
