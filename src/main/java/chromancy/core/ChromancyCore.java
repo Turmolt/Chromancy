@@ -10,6 +10,7 @@ import chromancy.core.help.Reference;
 import chromancy.core.help.RegisterHelper;
 import chromancy.core.items.BasicItem;
 import chromancy.core.items.Lumingot;
+import chromancy.generation.ChromancyWorld;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -32,6 +33,7 @@ public class ChromancyCore {
 	{
 		LIGHTTABLE						//gui names go here
 	}
+	
 	
 	//Creating the creative tab
 	public static CreativeTabs chromancyTab = new CreativeTabs("Chromancy"){
@@ -73,6 +75,10 @@ public class ChromancyCore {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		
+		// World Generation
+		ChromancyWorld.mainRegistry();
+		
 		// Initialize and register Blocks here
 		prismOre = new BlockPrismOre();
 		lightTable = new LightTable();
