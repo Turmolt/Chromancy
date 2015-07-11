@@ -75,12 +75,8 @@ public class ChromancyCore {
 	{
 		// Initialize and register Blocks here
 		prismOre = new BlockPrismOre();
-<<<<<<< HEAD
-
-=======
 		lightTable = new LightTable();
-		
->>>>>>> origin/master
+
 		RegisterHelper.registerBlock(prismOre);
 		RegisterHelper.registerBlock(lightTable);
 		
