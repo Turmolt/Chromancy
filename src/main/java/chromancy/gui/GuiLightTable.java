@@ -31,37 +31,11 @@ public class GuiLightTable extends GuiContainer{
 		
 	}
 	
-	/**@Override
-	public void drawScreen(int p1, int p2, float p3)
-	{
-		super.drawScreen(p1,p2,p3);
-	}**/
-	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int v1, int v2){
 		
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("Light Table"), 100, 5, 0x000000);
 		
-		/**GL11.glDisable(GL11.GL_LIGHTING);
-		
-		fontRendererObj.drawString(blockName, xSize/2-fontRendererObj.getStringWidth(blockName)/2+1,5,4210752);
-		fontRendererObj.drawString(I18n.format("container.inventory"), 6,ySize-96+2,4210752);
-		
-		String string = container.resultString;
-		if(string!=null)
-		{
-			State msgType = container.craftState;
-			EnumChatFormatting format = EnumChatFormatting.GREEN;
-			EnumChatFormatting shadowFormat = EnumChatFormatting.DARK_GRAY;
-			if(msgType==ContainerLightTable.State.ERROR)
-			{
-				format = EnumChatFormatting.WHITE;
-				shadowFormat = EnumChatFormatting.DARK_RED;
-			}
-			fontRendererObj.drawString(shadowFormat + string + EnumChatFormatting.RESET,  6+1, ySize - 95+2 - fontRendererObj.FONT_HEIGHT, 0);
-		}
-		GL11.glEnable(GL11.GL_LIGHTING);
-		**/
 	}
 
 	@Override
@@ -73,17 +47,6 @@ public class GuiLightTable extends GuiContainer{
 		
 		drawTexturedModalRect(guiLeft,guiTop,0,0,xSize,ySize);
 		
-		
-		/**
-		GL11.glPushMatrix();
-		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		
-		this.mc.getTextureManager().bindTexture(lightGuiTextures);
-		int k = width/2 - xSize/2;
-		int l = height/2 - ySize / 2;
-		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
-		GL11.glPopMatrix();
-		**/
 		
 	}
 

@@ -27,6 +27,7 @@ public class ContainerLightTable extends Container{
     }
 
     public InventoryCrafting craftMatrix;
+    public InventoryCrafting focusSlot;
     public IInventory craftResult;
     public LightTableRecipeHandler recipeHandler;
     private final World worldObj;
@@ -44,29 +45,32 @@ public class ContainerLightTable extends Container{
     	z=pz;
     	worldObj = world;
     	craftMatrix  = new InventoryCrafting(this, 3, 3);
+    	focusSlot = new InventoryCrafting(this,1,1);
     	craftResult  = new InventoryCraftResult();
     	
-    	this.addSlotToContainer(new SlotCrafting(inventory.player, craftMatrix, craftResult, 0, 141, 36));
+    	this.addSlotToContainer(new SlotCrafting(inventory.player, craftMatrix, craftResult, 0, 137, 35));
     	
     	for(int i=0;i<3;i++)
     	{
     		for(int k=0;k<3;k++)
     		{
-    			this.addSlotToContainer(new Slot(craftMatrix, k + i * 3, 4+k*18,3+i*18));
+    			this.addSlotToContainer(new Slot(craftMatrix, k + i * 3, 41+k*18,18+i*18));
     		}
     	}
+    	
+    	this.addSlotToContainer(new Slot(focusSlot,0,13,12));
     	
     	for (int i=0;i<3;i++)
     	{
     		for(int k=0;k<9;k++)
     		{
-    			this.addSlotToContainer(new Slot(inventory, k + i * 9 + 9, 8 + k * 18, 94 + i * 18));
+    			this.addSlotToContainer(new Slot(inventory, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
     		}
     	}
     	
     	for(int i = 0;i<9;i++)
     	{
-    		this.addSlotToContainer(new Slot(inventory, i, 8+i*18,148));
+    		this.addSlotToContainer(new Slot(inventory, i, 8+i*18,142));
     	}
     	
     	
