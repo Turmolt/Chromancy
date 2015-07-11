@@ -38,6 +38,10 @@ public class ChromancyCore {
 	//Declare Blocks
 	public static Block prismOre;
 	
+	//Crafting table Block
+	public static Block chromancyCraftingTable;
+	public static final int guiIDChromancyCraftingTable = 1;
+	
 	//Declare Items
 	public static Item essenceOfPureLight;
 	public static Item basicPrism;
@@ -58,7 +62,7 @@ public class ChromancyCore {
 	{
 		// Initialize and register Blocks here
 		prismOre = new BlockPrismOre();
-		
+
 		RegisterHelper.registerBlock(prismOre);
 		
 		// Initialize and register Items here
