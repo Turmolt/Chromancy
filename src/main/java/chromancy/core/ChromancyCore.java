@@ -5,12 +5,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import chromancy.core.blocks.BlockPrismOre;
+import chromancy.core.blocks.LightTable;
 import chromancy.core.help.Reference;
 import chromancy.core.help.RegisterHelper;
-import chromancy.core.items.*;
+import chromancy.core.items.BasicItem;
+import chromancy.core.items.Lumingot;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -24,6 +27,11 @@ public class ChromancyCore {
 	@Instance(value = Reference.MODID)
 	public static ChromancyCore instance;
 	
+	//enumerate guis
+	public enum GUIID
+	{
+		LIGHTTABLE						//gui names go here
+	}
 	
 	//Creating the creative tab
 	public static CreativeTabs chromancyTab = new CreativeTabs("Chromancy"){
@@ -35,8 +43,13 @@ public class ChromancyCore {
 		
 	};
 	
+	@SidedProxy(clientSide = "chromancy.core.ClientProxy", serverSide = "chromancy.core.ServerProxy")
+	public static ServerProxy proxy;
+	
+	
 	//Declare Blocks
 	public static Block prismOre;
+	public static Block lightTable;
 	
 	//Crafting table Block
 	public static Block chromancyCraftingTable;
@@ -62,8 +75,15 @@ public class ChromancyCore {
 	{
 		// Initialize and register Blocks here
 		prismOre = new BlockPrismOre();
+<<<<<<< HEAD
 
+=======
+		lightTable = new LightTable();
+		
+>>>>>>> origin/master
 		RegisterHelper.registerBlock(prismOre);
+		RegisterHelper.registerBlock(lightTable);
+		
 		
 		// Initialize and register Items here
 		essenceOfPureLight = new BasicItem(64, "essenceOfPureLight");
@@ -80,6 +100,7 @@ public class ChromancyCore {
 		indigoLumingot = new Lumingot(64, "indigoLumingot");
 		violetLumingot = new Lumingot(64, "violetLumingot");
 		
+		
 		RegisterHelper.registerItem(basicPrism);
 		RegisterHelper.registerItem(essenceOfPureLight);
 		RegisterHelper.registerItem(prismDust);
@@ -93,6 +114,9 @@ public class ChromancyCore {
 		RegisterHelper.registerItem(indigoLumingot);
 		RegisterHelper.registerItem(greenLumingot);
 		RegisterHelper.registerItem(orangeLumingot);
+		
+		
+		proxy.registerRenderThings();
 	}
 	
 	@EventHandler
@@ -104,7 +128,15 @@ public class ChromancyCore {
 		//Crafting
 		GameRegistry.addRecipe(new ItemStack(prismCore), " x ","x x"," x ",'x', prismShard);
 		GameRegistry.addRecipe(new ItemStack(basicPrism), "xx ","xx ","xx ",'x', prismShard);
-		GameRegistry.addRecipe(new ItemStack(paleLumingot), "xxx","xxx","   ",'x', prismShard);
+		GameRegistry.addRecipe(new ItemStack(paleLumingot), "xxx","xxx", 'x', prismShard);
+		
+	
+		proxy.registerNetwork();
+		
+		
+		
+		
+		
 
 	}
 	
