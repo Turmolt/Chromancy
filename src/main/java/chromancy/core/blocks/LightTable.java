@@ -41,7 +41,7 @@ public class LightTable extends Block{
 		Faces[0] = icon.registerIcon(Reference.MODID + ":ltSide");
 		Faces[1] = icon.registerIcon(Reference.MODID + ":ltTop");
 		Faces[2] = icon.registerIcon(Reference.MODID + ":ltSide");
-		Faces[3] = icon.registerIcon(Reference.MODID + ":ltSide");
+		Faces[3] = icon.registerIcon(Reference.MODID + ":ltBot");
 		Faces[4] = icon.registerIcon(Reference.MODID + ":ltSide");
 	}
 	
@@ -66,8 +66,8 @@ public class LightTable extends Block{
 	public IIcon getIcon(int side, int meta){
 		if(side==1)
 			return Faces[side];
-		else if(side == 3)
-			return Faces[side];
+		else if(side == 0)
+			return Faces[3];
 		else
 			return Faces[0];
 		

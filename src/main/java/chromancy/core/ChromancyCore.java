@@ -10,6 +10,7 @@ import chromancy.core.help.Reference;
 import chromancy.core.help.RegisterHelper;
 import chromancy.core.items.BasicItem;
 import chromancy.core.items.Lumingot;
+import chromancy.core.items.Focus;
 import chromancy.generation.ChromancyWorld;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -71,6 +72,7 @@ public class ChromancyCore {
 	public static Item violetLumingot;
 	public static Item orangeLumingot;
 	public static Item greenLumingot;
+	public static Item creativeFocus;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -101,6 +103,7 @@ public class ChromancyCore {
 		greenLumingot = new Lumingot(64, "greenLumingot");
 		indigoLumingot = new Lumingot(64, "indigoLumingot");
 		violetLumingot = new Lumingot(64, "violetLumingot");
+		creativeFocus = new Focus(1, "creativeFocus");
 		
 		
 		RegisterHelper.registerItem(basicPrism);
@@ -116,6 +119,7 @@ public class ChromancyCore {
 		RegisterHelper.registerItem(indigoLumingot);
 		RegisterHelper.registerItem(greenLumingot);
 		RegisterHelper.registerItem(orangeLumingot);
+		RegisterHelper.registerItem(creativeFocus);
 		
 		
 		proxy.registerRenderThings();
