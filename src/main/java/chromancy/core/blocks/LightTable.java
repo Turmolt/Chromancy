@@ -1,24 +1,28 @@
 package chromancy.core.blocks;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import chromancy.core.ChromancyCore;
 import chromancy.core.help.Reference;
+import chromancy.core.tileentity.LightTableTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
 
-//Here we go...
-public class LightTable extends Block{
+
+public class LightTable extends BlockContainer{
+	
 	
 	@SideOnly(Side.CLIENT)
 	private IIcon[] Faces;
 	
+	private static boolean keepInventory;
 	
 	public LightTable()
 	{
@@ -35,6 +39,9 @@ public class LightTable extends Block{
 		
 		
 	}
+	
+	
+	
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon)
 	{
@@ -44,8 +51,13 @@ public class LightTable extends Block{
 		Faces[3] = icon.registerIcon(Reference.MODID + ":ltBot");
 		Faces[4] = icon.registerIcon(Reference.MODID + ":ltSide");
 	}
+	@Override
+	public TileEntity createNewTileEntity(World p1, int p2) {
+		
+		return new LightTableTileEntity();
+	}
 	
-	
+
 	public boolean onBlockActivated(World parWorld, int x, int y, int z, EntityPlayer player, int q, float a, float b, float c)
 	{
 		if(!player.isSneaking()){
@@ -61,7 +73,7 @@ public class LightTable extends Block{
 		}
 	}
 	
-	
+
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta){
 		if(side==1)
@@ -73,6 +85,28 @@ public class LightTable extends Block{
 		
 	}
 	
-	
+	public static void updateLightTableState(boolean active, World world, int pX, int pY, int pZ)
+	{
+		int i = world.getBlockMetadata(pX,pY,pZ);
+		
+		TileEntity tileEntity = world.getTileEntity(pX,pY,pZ);
+		keepInventory = true;
+		if(active)
+		{
+			world.setBlock(pX,pY,pZ, ChromancyCore.lightTable);
+		} else {
+			world.setBlock(pX, pY, pZ, ChromancyCore.lightTable);
+		}
+		
+		keepInventory = false;
+		
+		world.setBlockMetadataWithNotify(pX, pY, pZ, i, 2);
+		
+		if(tileEntity != null)
+		{
+			tileEntity.validate();
+			world.setTileEntity(pX, pY, pZ, tileEntity);
+		}
+	}
 	
 }
