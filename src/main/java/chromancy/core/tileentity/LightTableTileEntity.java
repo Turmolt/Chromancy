@@ -16,7 +16,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 	private static final int[] slots_bottom = new int[]{2,1};
 	private static final int[] slots_side = new int[]{1};
 	
-	private ItemStack[] slots = new ItemStack[11];
+	private ItemStack[] slots = new ItemStack[12];
 	
 	public static boolean working = false;
 	
@@ -44,6 +44,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 
 	@Override
 	public boolean canInsertItem(int p1, ItemStack itemStack, int p_102007_3_) {
+		System.out.println("Valid?");
 		return this.isItemValidForSlot(p1, itemStack);
 	}
 
@@ -95,7 +96,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
 		this.slots[i] = itemstack;
-		
+		System.out.println("Slot: " + i);
 		if(itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()) {
 			itemstack.stackSize = this.getInventoryStackLimit();
 		}
@@ -116,8 +117,8 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return 64;
 	}
 
 	@Override
@@ -129,7 +130,14 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 
 	@Override
 	public boolean isItemValidForSlot(int p1, ItemStack itemStack) {
-		
+		if(p1==0)
+			System.out.println("ho");
+		if(p1 == 1)
+			System.out.println("ho");
+		if(p1==2)
+			System.out.println("ho");
+
+		System.out.println("Hi");
 		return true;
 	}
 

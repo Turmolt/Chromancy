@@ -6,8 +6,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.item.ItemStack;
 import chromancy.core.tileentity.LightTableTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,10 +24,10 @@ public class ContainerLightTable extends Container{
     
     private LightTableTileEntity lightTableTE;
     public int color;
+    public IInventory craftResult;
     
     /**public InventoryCrafting craftMatrix;
     public InventoryCrafting focusSlot;
-    public IInventory craftResult;
     public LightTableRecipeHandler recipeHandler;
     private final World worldObj;
     public InventoryPlayer playerInventory;
@@ -47,11 +49,11 @@ public class ContainerLightTable extends Container{
     	{
     		for(int k=0;k<3;k++)
     		{
-    			this.addSlotToContainer(new Slot(tileEntity, k + i * 3, 41+k*18,18+i*18));
+    			this.addSlotToContainer(new Slot(tileEntity, k + i * 3 + 1, 41+k*18,18+i*18));
     		}
     	}
     	
-    	this.addSlotToContainer(new Slot(tileEntity,0,13,12));
+    	this.addSlotToContainer(new Slot(tileEntity,11,13,12));
     	
     	for (int i=0;i<3;i++)
     	{
@@ -169,7 +171,7 @@ public class ContainerLightTable extends Container{
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    /**
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_)
     {
         ItemStack itemstack = null;
@@ -231,7 +233,7 @@ public class ContainerLightTable extends Container{
 
     
 
-	
+	/**
 	public boolean canMergeSlot(ItemStack parItemStack, Slot parSlot)
 	{
 		return !parSlot.inventory.equals(craftResult);
