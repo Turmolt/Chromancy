@@ -1,6 +1,7 @@
 package chromancy.gui;
 
 import chromancy.core.ChromancyCore;
+import chromancy.core.tileentity.LightTableTileEntity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -12,17 +13,20 @@ public class GuiHandler implements IGuiHandler{
 	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity entity = world.getTileEntity(x, y, z);
 		
 		if(ID==ChromancyCore.GUIID.LIGHTTABLE.ordinal())
-			return new ContainerLightTable(player.inventory,world,x,y,z);
+			return new ContainerLightTable(player.inventory,(LightTableTileEntity)entity);
 		
 		return null;
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z) {
+		TileEntity entity = world.getTileEntity(x, y, z);
+		
 		if(ID==ChromancyCore.GUIID.LIGHTTABLE.ordinal())
-			return new GuiLightTable(player.inventory, world, I18n.format("tile.lightTable.name"), x, y, z);
+			return new GuiLightTable(player.inventory, (LightTableTileEntity)entity);
 		return null;
 	}
 }

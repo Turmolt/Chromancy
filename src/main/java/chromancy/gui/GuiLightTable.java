@@ -1,34 +1,31 @@
 package chromancy.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import chromancy.gui.ContainerLightTable.State;
-import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.opengl.GL11;
+
+import chromancy.core.tileentity.LightTableTileEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiLightTable extends GuiContainer{
 	
 	public ContainerLightTable container;
-	private final String blockName;
+
+	public LightTableTileEntity lightTableTE;
 	
 	private static final ResourceLocation lightGuiTextures = new ResourceLocation("chromancy:textures/gui/lightTableGui.png");
 	private InventoryLightTableResult tile;
 	
-	public GuiLightTable(InventoryPlayer inventory, World world, String theBlockName, int x, int y, int z){
-		super(new ContainerLightTable(inventory, world, x, y, z));
-		blockName = theBlockName;
+	public GuiLightTable(InventoryPlayer inventory, LightTableTileEntity entity){
+		super(new ContainerLightTable(inventory, entity));
 		
+		this.lightTableTE = entity;
 	}
 	
 	@Override

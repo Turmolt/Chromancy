@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import chromancy.core.blocks.BlockPrismOre;
 import chromancy.core.blocks.LightTable;
+import chromancy.core.blocks.LightTableTE;
 import chromancy.core.help.Reference;
 import chromancy.core.help.RegisterHelper;
 import chromancy.core.items.BasicItem;
@@ -87,7 +88,7 @@ public class ChromancyCore {
 		
 		// Initialize and register Blocks here
 		prismOre = new BlockPrismOre();
-		lightTable = new LightTable();
+		lightTable = new LightTableTE();
 
 		RegisterHelper.registerBlock(prismOre);
 		RegisterHelper.registerBlock(lightTable);
