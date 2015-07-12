@@ -9,6 +9,7 @@ import chromancy.core.blocks.LightTable;
 import chromancy.core.help.Reference;
 import chromancy.core.help.RegisterHelper;
 import chromancy.core.items.BasicItem;
+import chromancy.core.items.LightCrystal;
 import chromancy.core.items.Lumingot;
 import chromancy.core.items.Focus;
 import chromancy.generation.ChromancyWorld;
@@ -74,6 +75,9 @@ public class ChromancyCore {
 	public static Item greenLumingot;
 	public static Item creativeFocus;
 	
+	//Declare energy related items
+	public static Item lightStorageCrystal;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -121,6 +125,10 @@ public class ChromancyCore {
 		RegisterHelper.registerItem(orangeLumingot);
 		RegisterHelper.registerItem(creativeFocus);
 		
+		// Initialize and register energy containing items here
+		lightStorageCrystal = new LightCrystal(500, "lightStorageCrystal");
+		
+		RegisterHelper.registerItem(lightStorageCrystal);
 		
 		proxy.registerRenderThings();
 	}
