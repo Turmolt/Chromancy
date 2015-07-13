@@ -107,6 +107,9 @@ public class Focus extends Item{
 
             entityarrow.setIsCritical(true);
             
+            if(color == Color.RED)
+            	entityarrow.setFire(100);
+            
 
 
             entityarrow.setDamage(entityarrow.getDamage() + (double)6 * 0.5D + 0.5D);
@@ -115,7 +118,7 @@ public class Focus extends Item{
             entityarrow.setKnockbackStrength(6);
 
 
-            p_77615_2_.playSoundAtEntity(p_77615_3_, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+            p_77615_2_.playSoundAtEntity(p_77615_3_, "fire.fire", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
             if (!p_77615_2_.isRemote)
             {
