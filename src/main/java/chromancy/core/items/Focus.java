@@ -111,7 +111,7 @@ public class Focus extends Item{
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
     {
-		switch(color){
+		switch(this.color){
 			case CREATIVE:
 				return icons[0];
 			case RED:

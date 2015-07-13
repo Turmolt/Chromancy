@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import chromancy.core.blocks.BlockPrismOre;
 import chromancy.core.blocks.LightTable;
 import chromancy.core.blocks.LightTable;
@@ -13,6 +14,7 @@ import chromancy.core.items.BasicItem;
 import chromancy.core.items.LightCrystal;
 import chromancy.core.items.Lumingot;
 import chromancy.core.items.Focus;
+import chromancy.core.tileentity.LightTableTileEntity;
 import chromancy.generation.ChromancyWorld;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -145,7 +147,10 @@ public class ChromancyCore {
 		GameRegistry.addRecipe(new ItemStack(basicPrism), "xx ","xx ","xx ",'x', prismShard);
 		GameRegistry.addRecipe(new ItemStack(paleLumingot), "xxx","xxx", 'x', prismShard);
 		
+		//Tile Entity
+		GameRegistry.registerTileEntity(LightTableTileEntity.class, "LightTable");
 	
+		
 		proxy.registerNetwork();
 		
 		

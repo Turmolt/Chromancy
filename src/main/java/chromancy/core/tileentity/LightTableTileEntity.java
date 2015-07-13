@@ -16,7 +16,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 	private static final int[] slots_bottom = new int[]{2,1};
 	private static final int[] slots_side = new int[]{1};
 	
-	private ItemStack[] slots = new ItemStack[12];
+	private ItemStack[] slots = new ItemStack[11];
 	
 	public static boolean working = false;
 	
@@ -33,7 +33,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 
 	public void openInventory() {
 		// TODO Auto-generated method stub
-		
+		setInventorySlotContents(0,this.slots[0]);
 	}
 
 
@@ -44,7 +44,6 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 
 	@Override
 	public boolean canInsertItem(int p1, ItemStack itemStack, int p_102007_3_) {
-		System.out.println("Valid?");
 		return this.isItemValidForSlot(p1, itemStack);
 	}
 
@@ -95,12 +94,17 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 	
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		this.slots[i] = itemstack;
-		System.out.println("Slot: " + i);
+		if(itemstack!=null)
+		{
+			this.slots[i] = itemstack;
+			System.out.println("Slot: " + i);
+			if(itemstack.getDisplayName().contains("Focus") && i == 0)
+				System.out.println("Focus!!!!");
+			working = true;
+			}
 		if(itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()) {
 			itemstack.stackSize = this.getInventoryStackLimit();
 		}
-		
 	}
 
 	@Override
@@ -130,14 +134,10 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 
 	@Override
 	public boolean isItemValidForSlot(int p1, ItemStack itemStack) {
-		if(p1==0)
-			System.out.println("ho");
-		if(p1 == 1)
-			System.out.println("ho");
-		if(p1==2)
-			System.out.println("ho");
-
-		System.out.println("Hi");
+		if(p1 == 0)
+			return itemStack.getDisplayName().contains("Focus");
+		else if (p1==10)
+			return false;
 		return true;
 	}
 
@@ -153,6 +153,8 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 		if (this.working)
 		{
 			//update while working
+			flag = true;
+			this.working = false;
 		}
 		if(!this.worldObj.isRemote)
 		{
@@ -160,6 +162,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 		}
 		if(flag)
 			this.markDirty();
+		
 	}
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);

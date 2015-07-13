@@ -3,7 +3,7 @@ package chromancy.core.help;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import chromancy.core.ChromancyCore;
+import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RegisterHelper {
@@ -20,6 +20,11 @@ public class RegisterHelper {
 	public static void addSmelting(Item input, Item output, float experience)
 	{
 		GameRegistry.addSmelting(input, new ItemStack(output), experience);
+	}
+	
+	public static void registerTileEntity(TileEntity entity, String name)
+	{
+		GameRegistry.registerTileEntity(entity.getClass(), name);
 	}
 	
 }

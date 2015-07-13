@@ -43,7 +43,7 @@ public class ContainerLightTable extends Container{
     	
     	
     
-    	this.addSlotToContainer(new SlotCrafting(inventory.player, tileEntity, tileEntity, 0, 137, 35));
+    	this.addSlotToContainer(new SlotCrafting(inventory.player, tileEntity, tileEntity, 10, 137, 35));
     	
     	for(int i=0;i<3;i++)
     	{
@@ -53,7 +53,7 @@ public class ContainerLightTable extends Container{
     		}
     	}
     	
-    	this.addSlotToContainer(new Slot(tileEntity,11,13,12));
+    	this.addSlotToContainer(new Slot(tileEntity,0,13,12));
     	
     	for (int i=0;i<3;i++)
     	{
@@ -72,19 +72,25 @@ public class ContainerLightTable extends Container{
     
     public void addCraftingToCrafters(ICrafting crafting)
     {
-    	
+    	super.addCraftingToCrafters(crafting);
     }
-    
-    public void detectAndSendChanged()
-    {
-    	
-    }
+
     
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int slot, int newValue)
     {
     	
     }
+    
+    
+    
+    public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		for(int i = 0; i < this.crafters.size(); i++) {
+			ICrafting icrafting = (ICrafting) this.crafters.get(i);
+		}
+
+	}
     	
     /**public ContainerLightTable(InventoryPlayer inventory, World world, int px, int py, int pz)
     {
