@@ -133,7 +133,7 @@ public class Focus extends Item{
             		nrg -= 5;
             	else
             		nrg = 100;
-            	ticks = 5;
+            	ticks = 2;
             
             	p1.setItemDamage(100-nrg);
             }
