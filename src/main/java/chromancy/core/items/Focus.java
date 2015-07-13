@@ -31,6 +31,7 @@ public class Focus extends Item{
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 	
+	public static int nrg;
 	public static int ticks = 0;
 	
 	public Focus(int StackSize, String focusType)
@@ -40,7 +41,8 @@ public class Focus extends Item{
 		setUnlocalizedName(focusType);
 		setTextureName("chromancy:" + focusType);
 		icons = new IIcon[3];
-		this.setMaxDamage(124012);
+		nrg = 100;
+		this.setMaxDamage(nrg);
 		if(focusType == "creativeFocus")
 		{
 			color = Color.CREATIVE;
@@ -77,11 +79,11 @@ public class Focus extends Item{
 	/**
      * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
      */
-    public void onPlayerStoppedUsing(ItemStack p_77615_1_, World p_77615_2_, EntityPlayer p_77615_3_, int p_77615_4_)
+    public void onPlayerStoppedUsing(ItemStack p1, World p_77615_2_, EntityPlayer p_77615_3_, int p_77615_4_)
     {
-        int j = this.getMaxItemUseDuration(p_77615_1_) - p_77615_4_;
+        int j = this.getMaxItemUseDuration(p1) - p_77615_4_;
 
-        ArrowLooseEvent event = new ArrowLooseEvent(p_77615_3_, p_77615_1_, j);
+        ArrowLooseEvent event = new ArrowLooseEvent(p_77615_3_, p1, j);
         MinecraftForge.EVENT_BUS.post(event);
         if (event.isCanceled())
         {
@@ -93,6 +95,7 @@ public class Focus extends Item{
 
         if (flag)
         {
+        	
             float f = (float)j / 20.0F;
             f = (f * f + f * 2.0F) / 3.0F;
 
@@ -124,7 +127,19 @@ public class Focus extends Item{
             {
                 p_77615_2_.spawnEntityInWorld(entityarrow);
             }
+            if(ticks == 0)
+            {
+            	if(nrg>0)
+            		nrg -= 5;
+            	else
+            		nrg = 100;
+            	ticks = 5;
+            
+            	p1.setItemDamage(100-nrg);
+            }
+
         }
+
     }
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister icon)

@@ -129,7 +129,7 @@ public class ChromancyCore {
 		RegisterHelper.registerItem(creativeFocus);
 		
 		// Initialize and register energy containing items here
-		lightStorageCrystal = new LightCrystal(500, "lightStorageCrystal");
+		lightStorageCrystal = new LightCrystal(124012, "lightStorageCrystal");
 		
 		RegisterHelper.registerItem(lightStorageCrystal);
 		
