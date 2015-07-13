@@ -3,10 +3,13 @@ package chromancy.core.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import chromancy.core.items.Focus;
+import chromancy.core.items.Focus.Color;
 
 public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 	
@@ -99,7 +102,17 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 			this.slots[i] = itemstack;
 			System.out.println("Slot: " + i);
 			if(itemstack.getDisplayName().contains("Focus") && i == 0)
+			{
 				System.out.println("Focus!!!!");
+				Focus f = (Focus) itemstack.getItem();
+				if(f.color == Color.BLUE)
+					System.out.println("Blue In Crafting");
+				else if(f.color == Color.RED)
+					System.out.println("Red In Crafting");
+				else if(f.color == Color.CREATIVE)
+					System.out.println("Creative In Crafting");
+				f.setDamage(itemstack, 500000);
+			}
 			working = true;
 			}
 		if(itemstack != null && itemstack.stackSize > this.getInventoryStackLimit()) {
