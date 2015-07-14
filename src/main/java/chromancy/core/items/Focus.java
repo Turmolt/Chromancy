@@ -1,6 +1,8 @@
 package chromancy.core.items;
 
+import ibxm.Player;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.command.ICommandSender;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -9,6 +11,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -263,11 +266,27 @@ public class Focus extends Item{
 		return p1;
 	}
 	
-	public void onUpdate(ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
+	public void onUpdate(ItemStack p_77663_1_, World currentWorld, Entity currentPlayer, int p_77663_4_, boolean p_77663_5_) {
 		if(this.ticks > 0)
 			this.ticks-=1;
 		if(this.tocks>0)
 			this.tocks-=1;
+		
+		if(CanSeeSun(currentPlayer, currentWorld)){
+			if(this.energy<this.maxEnergy)
+				this.energy+=incEnergy;
+			else if(this.energy>this.maxEnergy)
+			{
+				this.energy=this.maxEnergy;
+				this.recharging=false;
+			}
+			else if (this.energy==this.maxEnergy)
+			{
+				System.out.println("full");
+				this.recharging = false;
+			}
+		}
+		/*
 		if(this.recharging)
 		{
 			if(this.energy<this.maxEnergy)
@@ -283,6 +302,7 @@ public class Focus extends Item{
 				this.recharging = false;
 			}
 		}
+		*/
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -343,5 +363,20 @@ public class Focus extends Item{
     {
         return true;
     }
+	
+	// Check to see if player is on top world block and sun is out
+	public static boolean CanSeeSun(Entity currentPlayer, World world){
+		ChunkCoordinates playerCoord = ((ICommandSender) currentPlayer).getPlayerCoordinates();
+		int x = playerCoord.posX;
+		int y = playerCoord.posY;
+		int z = playerCoord.posZ;
+		int highestWorldY = world.getHeightValue(x, z);
+		if( y > highestWorldY){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 }
