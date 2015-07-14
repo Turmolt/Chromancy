@@ -1,4 +1,4 @@
-package chromancy.core.tileentity;
+package chromancy.core.tileEntity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -14,6 +14,9 @@ import chromancy.core.items.Focus.Color;
 public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 	
 	private String localizedName;
+	
+	private Focus focus;
+	private static int ticks;
 	
 	private static final int[] slots_top = new int[]{0};
 	private static final int[] slots_bottom = new int[]{2,1};
@@ -94,13 +97,15 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 	}
 
 	
-	
+	//When item is placed in inventory, this is called on slot i
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
+		//if the item stack isnt null
 		if(itemstack!=null)
 		{
 			this.slots[i] = itemstack;
 			System.out.println("Slot: " + i);
+			//if the item stack contains the word 'focus' then we know its a focus. if it goes into slot 0, special things happen.
 			if(itemstack.getDisplayName().contains("Focus") && i == 0)
 			{
 				System.out.println("Focus!!!!");
@@ -113,6 +118,9 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 					System.out.println("Creative In Crafting");
 				f.setDamage(itemstack, 0);
 				f.rechargeEnergy(1);
+			} else if(!itemstack.getDisplayName().contains("Focus") && i == 0)
+			{
+				System.out.println("Remove focus");
 			}
 			
 			
@@ -175,12 +183,15 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 		}
 		if(!this.worldObj.isRemote)
 		{
-			//update processes
+			
 		}
 		if(flag)
 			this.markDirty();
+		this.ticks-=1;
 		
 	}
+	
+	
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		

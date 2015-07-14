@@ -41,9 +41,9 @@ public class Focus extends Item{
 	public static boolean recharging;
 	private static int incEnergy;
 	
-	public Focus(int StackSize, String focusType, int max)
+	public Focus(String focusType, int max)
 	{
-		maxStackSize = StackSize;								
+		maxStackSize = 1;								
 		setCreativeTab(ChromancyCore.chromancyTab);
 		setUnlocalizedName(focusType);
 		setTextureName("chromancy:" + focusType);
@@ -76,14 +76,7 @@ public class Focus extends Item{
 			
 	}
 	
-    /**
-     * How long it takes to use or consume an item
-     */
-    public int getMaxItemUseDuration(ItemStack p_77626_1_)
-    {
-        return 72000;
-    }
-    
+
     
     public void rechargeEnergy(int rate)
     {
@@ -97,8 +90,10 @@ public class Focus extends Item{
      */
     public void onPlayerStoppedUsing(ItemStack p1, World p_77615_2_, EntityPlayer p_77615_3_, int p_77615_4_)
     {
+    	
         int j = this.getMaxItemUseDuration(p1) - p_77615_4_;
 
+        //Create new projectile event
         ArrowLooseEvent event = new ArrowLooseEvent(p_77615_3_, p1, j);
         MinecraftForge.EVENT_BUS.post(event);
         if (event.isCanceled())
@@ -109,7 +104,7 @@ public class Focus extends Item{
 
         boolean flag = true;
         boolean fire = false;
-
+        
         if (flag)
         {
         	
@@ -122,10 +117,10 @@ public class Focus extends Item{
             {
                 f = 1.0F;
             }
+            
+            //reduce energy by 5 if projectile is fired. if not enough energy, return
             if(this.tocks == 0)
             {
-            	
-            
             	if(this.energy>0)
             	{
             		fire = true;
@@ -145,6 +140,8 @@ public class Focus extends Item{
             	
             	p1.setItemDamage(this.energy);
             }
+            
+            //Has arrow been set to fire?
             if(fire)
             {
             	if(this.tocks > 0)
@@ -192,6 +189,7 @@ public class Focus extends Item{
         return (1.0-((double)this.energy) /((double) this.maxEnergy));
     }
     
+    //Display icons
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister icon)
 	{
@@ -213,6 +211,8 @@ public class Focus extends Item{
     {
         return true;
     }
+    
+    //When the item is right clicked.
 	@Override
 	public ItemStack onItemRightClick(ItemStack p1, World p2, EntityPlayer p3)
 	{
@@ -264,13 +264,14 @@ public class Focus extends Item{
 	}
 	
 	public void onUpdate(ItemStack p_77663_1_, World currentWorld, Entity currentPlayer, int p_77663_4_, boolean p_77663_5_) {
+		//tick/tock goes down by 1 per tick. for use as in game timer
 		if(this.ticks > 0)
 			this.ticks-=1;
 		if(this.tocks>0)
 			this.tocks-=1;
 		
 		//also checks for this.recharging so my function works too
-		if(CanSeeSun(currentPlayer, currentWorld) ||this.recharging){
+		if(CanSeeSun(currentPlayer, currentWorld) || this.recharging){
 			if(this.energy<this.maxEnergy)
 				this.energy+=incEnergy;
 			else if(this.energy>this.maxEnergy)
@@ -284,23 +285,6 @@ public class Focus extends Item{
 				this.recharging = false;
 			}
 		}
-		/*
-		if(this.recharging)
-		{
-			if(this.energy<this.maxEnergy)
-				this.energy+=incEnergy;
-			else if(this.energy>this.maxEnergy)
-			{
-				this.energy=this.maxEnergy;
-				this.recharging=false;
-			}
-			else if (this.energy==this.maxEnergy)
-			{
-				System.out.println("full");
-				this.recharging = false;
-			}
-		}
-		*/
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -366,11 +350,16 @@ public class Focus extends Item{
 	public static boolean CanSeeSun(Entity currentPlayer, World world){
 		//added energy < maxEnergy so it doesnt try to charge when full
 		//also added !recharging so that if it is recharging using my method it wont also charge using yours at the same time
-		if(energy < maxEnergy&&!recharging && ((world.getCelestialAngle(0) < .25) || (world.getCelestialAngle(0) > .75)))
+		if(energy < maxEnergy&&!recharging && ((world.getCelestialAngle(0) < .25) || (world.getCelestialAngle(0) > .75)) && (world.getRainStrength(0) < 0.25))
 		{
 			//set charge rate
 			incEnergy=1;
 			ChunkCoordinates playerCoord = ((ICommandSender) currentPlayer).getPlayerCoordinates();
+			
+			
+			
+			
+			
 			int x = playerCoord.posX;
 			int y = playerCoord.posY;
 			int z = playerCoord.posZ;
@@ -386,5 +375,12 @@ public class Focus extends Item{
 		else
 			return false;
 	}
-	
+    /**
+     * How long it takes to use or consume an item
+     */
+    public int getMaxItemUseDuration(ItemStack p_77626_1_)
+    {
+        return 72000;
+    }
+    
 }

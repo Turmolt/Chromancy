@@ -9,7 +9,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import chromancy.core.ChromancyCore;
 import chromancy.core.help.Reference;
-import chromancy.core.tileentity.LightTableTileEntity;
+import chromancy.core.tileEntity.LightTableTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

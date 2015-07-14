@@ -10,7 +10,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
-import chromancy.core.tileentity.LightTableTileEntity;
+import chromancy.core.tileEntity.LightTableTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -53,7 +53,7 @@ public class ContainerLightTable extends Container{
     		}
     	}
     	
-    	this.addSlotToContainer(new Slot(tileEntity,0,13,12));
+    	this.addSlotToContainer(new LightTableSlot(tileEntity,0,13,12));
     	
     	for (int i=0;i<3;i++)
     	{
@@ -91,89 +91,14 @@ public class ContainerLightTable extends Container{
 		}
 
 	}
-    	
-    /**public ContainerLightTable(InventoryPlayer inventory, World world, int px, int py, int pz)
-    {
-    	x=px;
-    	y=py;
-    	z=pz;
-    	worldObj = world;
-    	craftMatrix  = new InventoryCrafting(this, 3, 3);
-    	focusSlot = new InventoryCrafting(this,1,1);
-    	craftResult  = new InventoryCraftResult();
-    	
-    	this.addSlotToContainer(new SlotCrafting(inventory.player, craftMatrix, craftResult, 0, 137, 35));
-    	
-    	for(int i=0;i<3;i++)
-    	{
-    		for(int k=0;k<3;k++)
-    		{
-    			this.addSlotToContainer(new Slot(craftMatrix, k + i * 3, 41+k*18,18+i*18));
-    		}
-    	}
-    	
-    	this.addSlotToContainer(new Slot(focusSlot,0,13,12));
-    	
-    	for (int i=0;i<3;i++)
-    	{
-    		for(int k=0;k<9;k++)
-    		{
-    			this.addSlotToContainer(new Slot(inventory, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
-    		}
-    	}
-    	
-    	for(int i = 0;i<9;i++)
-    	{
-    		this.addSlotToContainer(new Slot(inventory, i, 8+i*18,142));
-    	}
-    	
-    	
-    	
-    	
-    	onCraftMatrixChanged(craftMatrix);
-    	
-    
-    }**/
     
 
-    
-   /* public void onCraftMatrixChanged(IInventory inv)
-    {
-    	//craftResult.setInventorySlotContents(0, LightTableRecipeHandler.getInstance().findMatchingRecipe(craftMatrix,worldObj));
-    }
-*/
+
     public boolean canInteractWith(EntityPlayer p1)
     {
         return true;
     }
     
-    
-    /**
-     * Called when the container is closed.
-     */
-    /**
-    public void onContainerClosed(EntityPlayer p1)
-    {
-        super.onContainerClosed(p1);
-
-        if (!this.worldObj.isRemote)
-        {
-            for (int i = 0; i < 9; ++i)
-            {
-                ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
-
-                if (itemstack != null)
-                {
-                    p1.dropPlayerItemWithRandomChoice(itemstack, false);
-                }
-            }
-        }
-    }
-    
-    public boolean canInteractWith(EntityPlayer p1)
-    {
-        return this.worldObj.getBlock(this.x, this.y, this.z) != ChromancyCore.lightTable ? false : p1.getDistanceSq((double)this.x + 0.5D, (double)this.y + 0.5D, (double)this.z + 0.5D) <= 64.0D;
-    }
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
@@ -235,23 +160,5 @@ public class ContainerLightTable extends Container{
 
         return itemstack;
     }
-
-
-    
-
-	/**
-	public boolean canMergeSlot(ItemStack parItemStack, Slot parSlot)
-	{
-		return !parSlot.inventory.equals(craftResult);
-	}
-
-	@Override
-	public Slot getSlot(int parSlotIndex)
-	{
-	    if(parSlotIndex >= inventorySlots.size())
-	    parSlotIndex = inventorySlots.size() - 1;
-	    return super.getSlot(parSlotIndex);
-	}
-	**/
 
 }

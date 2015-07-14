@@ -1,7 +1,7 @@
 package chromancy.gui;
 
 import chromancy.core.ChromancyCore;
-import chromancy.core.tileentity.LightTableTileEntity;
+import chromancy.core.tileEntity.LightTableTileEntity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

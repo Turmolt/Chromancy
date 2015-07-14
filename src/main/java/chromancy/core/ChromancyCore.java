@@ -13,8 +13,8 @@ import chromancy.core.help.RegisterHelper;
 import chromancy.core.items.BasicItem;
 import chromancy.core.items.LightCrystal;
 import chromancy.core.items.Lumingot;
+import chromancy.core.tileEntity.LightTableTileEntity;
 import chromancy.core.items.Focus;
-import chromancy.core.tileentity.LightTableTileEntity;
 import chromancy.generation.ChromancyWorld;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -36,7 +36,7 @@ public class ChromancyCore {
 	//enumerate guis
 	public enum GUIID
 	{
-		LIGHTTABLE						//gui names go here
+		LIGHTTABLE, PRISMTABLE							//gui names go here
 	}
 	
 	
@@ -60,7 +60,6 @@ public class ChromancyCore {
 	
 	//Crafting table Block
 	public static Block chromancyCraftingTable;
-	public static final int guiIDChromancyCraftingTable = 1;
 	
 	//Declare Items
 	public static Item essenceOfPureLight;
@@ -84,7 +83,6 @@ public class ChromancyCore {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		
 		// World Generation
 		ChromancyWorld.mainRegistry();
 		
@@ -110,7 +108,7 @@ public class ChromancyCore {
 		greenLumingot = new Lumingot(64, "greenLumingot");
 		indigoLumingot = new Lumingot(64, "indigoLumingot");
 		violetLumingot = new Lumingot(64, "violetLumingot");
-		creativeFocus = new Focus(1, "creativeFocus", 100);
+		creativeFocus = new Focus("creativeFocus", 100);
 		
 		
 		RegisterHelper.registerItem(basicPrism);
