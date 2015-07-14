@@ -369,7 +369,7 @@ public class Focus extends Item{
 	public static boolean CanSeeSun(Entity currentPlayer, World world){
 		//added energy < maxEnergy so it doesnt try to charge when full
 		//also added !recharging so that if it is recharging using my method it wont also charge using yours at the same time
-		if(energy < maxEnergy&&!recharging)
+		if(energy < maxEnergy&&!recharging && ((world.getCelestialAngle(0) < .25) || (world.getCelestialAngle(0) > .75)))
 		{
 			//set charge rate
 			incEnergy=1;
