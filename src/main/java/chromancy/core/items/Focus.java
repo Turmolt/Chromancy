@@ -39,7 +39,7 @@ public class Focus extends Item{
 	public static int ticks = 0;
 	public static int tocks = 0;
 	public static boolean recharging;
-	private static int incEnergy;
+	public static int incEnergy;
 	
 	public Focus(String focusType, int max)
 	{

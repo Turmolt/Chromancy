@@ -109,7 +109,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 			if(itemstack.getDisplayName().contains("Focus") && i == 0)
 			{
 				System.out.println("Focus!!!!");
-				Focus f = (Focus) itemstack.getItem();
+				Focus f = this.focus = (Focus) itemstack.getItem();
 				if(f.color == Color.BLUE)
 					System.out.println("Blue In Crafting");
 				else if(f.color == Color.RED)
@@ -173,6 +173,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 
 	public void updateEntity()
 	{
+		
 		//Change flag to true when the table is processing things on its own. it forces the data to be saved
 		boolean flag = false;
 		if (this.working)
@@ -181,13 +182,17 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 			flag = true;
 			this.working = false;
 		}
-		if(!this.worldObj.isRemote)
-		{
-			
-		}
+		if(this.worldObj != null)
+			if(!this.worldObj.isRemote)
+			{
+				//if(Minecraft.getMinecraft().theWorld.isRemote)
+				//Minecraft.getMinecraft().thePlayer.chat stuff
+			}
 		if(flag)
 			this.markDirty();
 		this.ticks-=1;
+		
+		
 		
 	}
 	

@@ -39,7 +39,6 @@ public class ChromancyCore {
 		LIGHTTABLE, PRISMTABLE							//gui names go here
 	}
 	
-	
 	//Creating the creative tab
 	public static CreativeTabs chromancyTab = new CreativeTabs("Chromancy"){
 		@Override
