@@ -39,7 +39,7 @@ public class Focus extends Item{
 	public static int ticks = 0;
 	public static int tocks = 0;
 	public static boolean recharging;
-	private int incEnergy;
+	private static int incEnergy;
 	
 	public Focus(int StackSize, String focusType, int max)
 	{
@@ -272,7 +272,8 @@ public class Focus extends Item{
 		if(this.tocks>0)
 			this.tocks-=1;
 		
-		if(CanSeeSun(currentPlayer, currentWorld)){
+		//also checks for this.recharging so my function works too
+		if(CanSeeSun(currentPlayer, currentWorld) ||this.recharging){
 			if(this.energy<this.maxEnergy)
 				this.energy+=incEnergy;
 			else if(this.energy>this.maxEnergy)
@@ -366,17 +367,27 @@ public class Focus extends Item{
 	
 	// Check to see if player is on top world block and sun is out
 	public static boolean CanSeeSun(Entity currentPlayer, World world){
-		ChunkCoordinates playerCoord = ((ICommandSender) currentPlayer).getPlayerCoordinates();
-		int x = playerCoord.posX;
-		int y = playerCoord.posY;
-		int z = playerCoord.posZ;
-		int highestWorldY = world.getHeightValue(x, z);
-		if( y > highestWorldY){
-			return true;
+		//added energy < maxEnergy so it doesnt try to charge when full
+		//also added !recharging so that if it is recharging using my method it wont also charge using yours at the same time
+		if(energy < maxEnergy&&!recharging)
+		{
+			//set charge rate
+			incEnergy=1;
+			ChunkCoordinates playerCoord = ((ICommandSender) currentPlayer).getPlayerCoordinates();
+			int x = playerCoord.posX;
+			int y = playerCoord.posY;
+			int z = playerCoord.posZ;
+			int highestWorldY = world.getHeightValue(x, z);
+		
+			if( y > highestWorldY){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
-		else{
+		else
 			return false;
-		}
 	}
 	
 }
