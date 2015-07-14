@@ -166,12 +166,9 @@ public class Focus extends Item{
 
 
             	p_77615_2_.playSoundAtEntity(p_77615_3_, "fire.fire", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-
-        		if (!p_77615_2_.isRemote)
-                {
-                    p_77615_2_.spawnEntityInWorld(entityarrow);
-                    System.out.println("FIRE!");
-                }
+            	System.out.println("GG");
+                p_77615_2_.spawnEntityInWorld(entityarrow);
+                System.out.println("FIRE!");
         		
             }
 
