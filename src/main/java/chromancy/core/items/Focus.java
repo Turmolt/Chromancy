@@ -31,18 +31,24 @@ public class Focus extends Item{
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 	
-	public static int nrg;
+	public static int energy;
+	public static int maxEnergy;
 	public static int ticks = 0;
+	public static int tocks = 0;
+	public static boolean recharging;
+	private int incEnergy;
 	
-	public Focus(int StackSize, String focusType)
+	public Focus(int StackSize, String focusType, int max)
 	{
 		maxStackSize = StackSize;								
 		setCreativeTab(ChromancyCore.chromancyTab);
 		setUnlocalizedName(focusType);
 		setTextureName("chromancy:" + focusType);
 		icons = new IIcon[3];
-		nrg = 100;
-		this.setMaxDamage(nrg);
+		this.energy = 0;
+		this.maxEnergy = max;
+		this.setMaxDamage(maxEnergy);
+		this.recharging = false;
 		if(focusType == "creativeFocus")
 		{
 			color = Color.CREATIVE;
@@ -74,6 +80,13 @@ public class Focus extends Item{
     {
         return 72000;
     }
+    
+    
+    public void rechargeEnergy(int rate)
+    {
+    		this.recharging=true;
+    		this.incEnergy = rate;
+    }
 	
 	
 	/**
@@ -92,6 +105,7 @@ public class Focus extends Item{
         j = event.charge;
 
         boolean flag = true;
+        boolean fire = false;
 
         if (flag)
         {
@@ -105,42 +119,79 @@ public class Focus extends Item{
             {
                 f = 1.0F;
             }
-
-            EntityArrow entityarrow = new EntityArrow(p_77615_2_, p_77615_3_, 1.0f * 2.0F);
-
-            entityarrow.setIsCritical(true);
-            
-            if(color == Color.RED)
-            	entityarrow.setFire(100);
-            
-
-
-            entityarrow.setDamage(entityarrow.getDamage() + (double)6 * 0.5D + 0.5D);
-            
-
-            entityarrow.setKnockbackStrength(6);
-
-
-            p_77615_2_.playSoundAtEntity(p_77615_3_, "fire.fire", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-
-            if (!p_77615_2_.isRemote)
+            if(this.tocks == 0)
             {
-                p_77615_2_.spawnEntityInWorld(entityarrow);
-            }
-            if(ticks == 0)
-            {
-            	if(nrg>0)
-            		nrg -= 5;
-            	else
-            		nrg = 100;
-            	ticks = 2;
+            	
             
-            	p1.setItemDamage(100-nrg);
+            	if(this.energy>0)
+            	{
+            		fire = true;
+            		this.energy -= 5;
+            	}
+            	else if(this.energy <= 0)
+            	{
+            		System.out.println("Out of Energy");
+            		this.energy=0;
+            		return;
+            	}
+            	if (this.recharging)
+            		this.recharging = false;
+            	this.tocks = 2;
+            	System.out.println(this.energy + " " + this.maxEnergy);
+            	
+            	
+            	p1.setItemDamage(this.energy);
             }
+            if(fire)
+            {
+            	if(this.tocks > 0)
+            		System.out.println("Error");
+            	fire = false;
+            	EntityArrow entityarrow = new EntityArrow(p_77615_2_, p_77615_3_, 1.0f * 2.0F);
+
+            	entityarrow.setIsCritical(true);
+
+            	if(color == Color.RED)
+            		entityarrow.setFire(100);
+
+
+
+            	entityarrow.setDamage(entityarrow.getDamage() + (double)6 * 0.5D + 0.5D);
+
+
+            	entityarrow.setKnockbackStrength(6);
+
+
+            	p_77615_2_.playSoundAtEntity(p_77615_3_, "fire.fire", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+
+        		if (!p_77615_2_.isRemote)
+                {
+                    p_77615_2_.spawnEntityInWorld(entityarrow);
+                    System.out.println("FIRE!");
+                }
+        		
+            }
+
+            
 
         }
+        
 
     }
+ 
+    
+    /**
+     * Queries the percentage of the 'Durability' bar that should be drawn.
+     *
+     * @param stack The current ItemStack
+     * @return 1.0 for 100% 0 for 0%
+     */
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack)
+    {
+        return (1.0-((double)this.energy) /((double) this.maxEnergy));
+    }
+    
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister icon)
 	{
@@ -148,12 +199,25 @@ public class Focus extends Item{
 		icons[1] = icon.registerIcon(Reference.MODID + ":redFocus");
 		icons[2] = icon.registerIcon(Reference.MODID + ":blueFocus");
 	}
-	
+	   
+    /**
+     * Determines if the durability bar should be rendered for this item.
+     * Defaults to vanilla stack.isDamaged behavior.
+     * But modders can use this for any data they wish.
+     *
+     * @param stack The current Item Stack
+     * @return True if it should render the 'durability' bar.
+     */
+    @Override
+    public boolean showDurabilityBar(ItemStack stack)
+    {
+        return true;
+    }
 	@Override
 	public ItemStack onItemRightClick(ItemStack p1, World p2, EntityPlayer p3)
 	{
 		
-		if(ticks == 0){
+		if(this.ticks == 0){
 			if(!p3.isSneaking())
 			{
 				ArrowNockEvent event = new ArrowNockEvent(p3, p1);
@@ -194,14 +258,31 @@ public class Focus extends Item{
 			
 				}
 			}
-			ticks=5;
+			this.ticks=5;
 		}
 		return p1;
 	}
 	
 	public void onUpdate(ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
-		if(ticks > 0)
-			ticks-=1;
+		if(this.ticks > 0)
+			this.ticks-=1;
+		if(this.tocks>0)
+			this.tocks-=1;
+		if(this.recharging)
+		{
+			if(this.energy<this.maxEnergy)
+				this.energy+=incEnergy;
+			else if(this.energy>this.maxEnergy)
+			{
+				this.energy=this.maxEnergy;
+				this.recharging=false;
+			}
+			else if (this.energy==this.maxEnergy)
+			{
+				System.out.println("full");
+				this.recharging = false;
+			}
+		}
 	}
 	
 	@SideOnly(Side.CLIENT)

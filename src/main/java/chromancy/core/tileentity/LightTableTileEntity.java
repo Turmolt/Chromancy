@@ -112,7 +112,7 @@ public class LightTableTileEntity extends TileEntity implements ISidedInventory{
 				else if(f.color == Color.CREATIVE)
 					System.out.println("Creative In Crafting");
 				f.setDamage(itemstack, 0);
-				f.nrg = 100;
+				f.rechargeEnergy(1);
 			}
 			
 			

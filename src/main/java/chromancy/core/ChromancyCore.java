@@ -110,7 +110,7 @@ public class ChromancyCore {
 		greenLumingot = new Lumingot(64, "greenLumingot");
 		indigoLumingot = new Lumingot(64, "indigoLumingot");
 		violetLumingot = new Lumingot(64, "violetLumingot");
-		creativeFocus = new Focus(1, "creativeFocus");
+		creativeFocus = new Focus(1, "creativeFocus", 100);
 		
 		
 		RegisterHelper.registerItem(basicPrism);
