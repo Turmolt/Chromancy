@@ -2,6 +2,8 @@ package chromancy.core;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -14,6 +16,7 @@ import chromancy.core.help.RegisterHelper;
 import chromancy.core.items.BasicItem;
 import chromancy.core.items.LightCrystal;
 import chromancy.core.items.Lumingot;
+import chromancy.core.tileEntity.LADTileEntity;
 import chromancy.core.tileEntity.LightTableTileEntity;
 import chromancy.core.items.Focus;
 import chromancy.generation.ChromancyWorld;
@@ -146,9 +149,11 @@ public class ChromancyCore {
 		GameRegistry.addRecipe(new ItemStack(prismCore), " x ","x x"," x ",'x', prismShard);
 		GameRegistry.addRecipe(new ItemStack(basicPrism), "xx ","xx ","xx ",'x', prismShard);
 		GameRegistry.addRecipe(new ItemStack(paleLumingot), "xxx","xxx", 'x', prismShard);
-		
+		GameRegistry.addRecipe(new ItemStack(lightAmplificationDevice), "#x#","#o#","#x#", '#', Items.iron_ingot, 'o', Blocks.planks, 'x', prismShard);
+
 		//Tile Entity
 		GameRegistry.registerTileEntity(LightTableTileEntity.class, "LightTable");
+		GameRegistry.registerTileEntity(LADTileEntity.class, "LADTileEntity");
 	
 		
 		proxy.registerNetwork();

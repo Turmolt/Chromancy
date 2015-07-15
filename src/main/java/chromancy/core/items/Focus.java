@@ -271,20 +271,21 @@ public class Focus extends Item{
 			this.tocks-=1;
 		
 		//also checks for this.recharging so my function works too
-		if(CanSeeSun(currentPlayer, currentWorld) || this.recharging){
-			if(this.energy<this.maxEnergy)
-				this.energy+=incEnergy;
-			else if(this.energy>this.maxEnergy)
-			{
-				this.energy=this.maxEnergy;
-				this.recharging=false;
+		if(this.energy < this.maxEnergy)
+			if(CanSeeSun(currentPlayer, currentWorld) || this.recharging){
+				if(this.energy<this.maxEnergy)
+					this.energy+=incEnergy;
+				else if(this.energy>this.maxEnergy)
+				{
+					this.energy=this.maxEnergy;
+					this.recharging=false; 
+				}
+				else if (this.energy==this.maxEnergy)
+				{
+					System.out.println("full");
+					this.recharging = false;
+				}
 			}
-			else if (this.energy==this.maxEnergy)
-			{
-				System.out.println("full");
-				this.recharging = false;
-			}
-		}
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -355,11 +356,7 @@ public class Focus extends Item{
 			//set charge rate
 			incEnergy=1;
 			ChunkCoordinates playerCoord = ((ICommandSender) currentPlayer).getPlayerCoordinates();
-			
-			
-			
-			
-			
+
 			int x = playerCoord.posX;
 			int y = playerCoord.posY;
 			int z = playerCoord.posZ;
