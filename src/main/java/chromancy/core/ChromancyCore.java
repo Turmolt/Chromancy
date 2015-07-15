@@ -80,6 +80,7 @@ public class ChromancyCore {
 	public static Item orangeLumingot;
 	public static Item greenLumingot;
 	public static Item creativeFocus;
+	public static Item lens;
 	
 	//Declare energy related items
 	public static Item lightStorageCrystal;
@@ -114,6 +115,7 @@ public class ChromancyCore {
 		indigoLumingot = new Lumingot(64, "indigoLumingot");
 		violetLumingot = new Lumingot(64, "violetLumingot");
 		creativeFocus = new Focus("creativeFocus", 100);
+		lens = new BasicItem(64, "lens");
 		
 		
 		RegisterHelper.registerItem(basicPrism);
@@ -130,6 +132,7 @@ public class ChromancyCore {
 		RegisterHelper.registerItem(greenLumingot);
 		RegisterHelper.registerItem(orangeLumingot);
 		RegisterHelper.registerItem(creativeFocus);
+		RegisterHelper.registerItem(lens);
 		
 		// Initialize and register energy containing items here
 		lightStorageCrystal = new LightCrystal(124012, "lightStorageCrystal");
