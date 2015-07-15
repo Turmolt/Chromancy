@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import chromancy.core.blocks.BlockPrismOre;
+import chromancy.core.blocks.LightAmplificationDevice;
 import chromancy.core.blocks.LightTable;
 import chromancy.core.blocks.LightTable;
 import chromancy.core.help.Reference;
@@ -56,6 +57,7 @@ public class ChromancyCore {
 	//Declare Blocks
 	public static Block prismOre;
 	public static Block lightTable;
+	public static Block lightAmplificationDevice;
 	
 	//Crafting table Block
 	public static Block chromancyCraftingTable;
@@ -88,10 +90,11 @@ public class ChromancyCore {
 		// Initialize and register Blocks here
 		prismOre = new BlockPrismOre();
 		lightTable = new LightTable();
+		lightAmplificationDevice = new LightAmplificationDevice();
 
 		RegisterHelper.registerBlock(prismOre);
 		RegisterHelper.registerBlock(lightTable);
-		
+		RegisterHelper.registerBlock(lightAmplificationDevice);
 		
 		// Initialize and register Items here
 		essenceOfPureLight = new BasicItem(64, "essenceOfPureLight");
