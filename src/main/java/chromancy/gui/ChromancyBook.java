@@ -8,8 +8,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class ChromancyBook extends GuiScreen {
 	
-	int guiWidth = 650;
-	int guiHeight = 450;
+	int guiWidth = 256;
+	int guiHeight = 256;
 	
 	@Override
 	public void drawScreen(int x, int y, float ticks){
