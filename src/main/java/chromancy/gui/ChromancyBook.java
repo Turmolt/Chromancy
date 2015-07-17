@@ -6,6 +6,7 @@ import chromancy.core.help.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 
 public class ChromancyBook extends GuiScreen {
 	
@@ -17,7 +18,7 @@ public class ChromancyBook extends GuiScreen {
 	int guiHeight = 173;
 
 	int tabWidth = 22;
-	int tabHeight = 19;
+	int tabHeight = 18;
 	
 	int tab1v = 176;
 	int tab2v = 176;
@@ -154,14 +155,14 @@ public class ChromancyBook extends GuiScreen {
 		drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
 		drawTexturedModalRect(guiX + 12, guiY + 18, 0, tab1v, tabWidth, tabHeight);
 		drawTexturedModalRect(guiX + 12, guiY + 18 + tabHeight + 1, 21, tab2v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 2) + 1, 42, tab3v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 3) + 1, 63, tab4v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 4) + 1, 84, tab5v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 5) + 1, 105, tab6v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 6) + 1, 126, tab7v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 7) + 1, 147, tab8v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 2) + 2, 42, tab3v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 3) + 3, 63, tab4v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 4) + 4, 84, tab5v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 5) + 5, 105, tab6v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 6) + 6, 126, tab7v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 7) + 7, 147, tab8v, tabWidth, tabHeight);
 		if(DarkLight){
-			drawTexturedModalRect(guiX + 240, guiY + 18 + (tabHeight * 7) + 1, 168, tab9v, tabWidth, tabHeight);
+			drawTexturedModalRect(guiX + 240, guiY + 18 + (tabHeight * 7) + 7, 168, tab9v, tabWidth, tabHeight);
 		}
 		//fontRendererObj.drawString("Chromancy", guiX + 10, guiY + 10, 0xFFFFFF);
 		
