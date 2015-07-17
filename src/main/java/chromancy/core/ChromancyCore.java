@@ -158,6 +158,7 @@ public class ChromancyCore {
 		GameRegistry.addRecipe(new ItemStack(paleLumingot), "xxx","xxx", 'x', prismShard);
 		GameRegistry.addRecipe(new ItemStack(lens), "###","#x#","###", '#', Blocks.glass_pane, 'x', prismShard);
 		GameRegistry.addRecipe(new ItemStack(lightAmplificationDevice), "#x#","#o#","#x#", '#', Items.iron_ingot, 'o', Blocks.planks, 'x', lens);
+		GameRegistry.addRecipe(new ItemStack(lightTable), "www","xxx","xxx",'w', Blocks.planks, 'x', prismShard);
 
 		//Tile Entity
 		GameRegistry.registerTileEntity(LightTableTileEntity.class, "LightTable");
