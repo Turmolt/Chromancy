@@ -14,6 +14,7 @@ import chromancy.core.blocks.LightTable;
 import chromancy.core.help.Reference;
 import chromancy.core.help.RegisterHelper;
 import chromancy.core.items.BasicItem;
+import chromancy.core.items.ChromancyBookItem;
 import chromancy.core.items.LightCrystal;
 import chromancy.core.items.Lumingot;
 import chromancy.core.tileEntity.LADTileEntity;
@@ -81,6 +82,7 @@ public class ChromancyCore {
 	public static Item greenLumingot;
 	public static Item creativeFocus;
 	public static Item lens;
+	public static Item chromancyBookItem;
 	
 	//Declare energy related items
 	public static Item lightStorageCrystal;
@@ -116,8 +118,10 @@ public class ChromancyCore {
 		violetLumingot = new Lumingot(64, "violetLumingot");
 		creativeFocus = new Focus("creativeFocus", 100);
 		lens = new BasicItem(64, "lens");
+		chromancyBookItem = new ChromancyBookItem(1, "chromancyBookItem");
 		
 		
+		RegisterHelper.registerItem(chromancyBookItem);
 		RegisterHelper.registerItem(basicPrism);
 		RegisterHelper.registerItem(essenceOfPureLight);
 		RegisterHelper.registerItem(prismDust);
