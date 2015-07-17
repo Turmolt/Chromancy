@@ -9,6 +9,10 @@ import net.minecraft.util.ResourceLocation;
 
 public class ChromancyBook extends GuiScreen {
 	
+	String image = "textures/gui/ChromancyBook_Light.png";
+	
+	boolean DarkLight = false;
+	
 	int guiWidth = 256;
 	int guiHeight = 173;
 
@@ -17,9 +21,15 @@ public class ChromancyBook extends GuiScreen {
 	
 	int tab1v = 176;
 	int tab2v = 176;
+	int tab3v = 176;
+	int tab4v = 176;
+	int tab5v = 176;
+	int tab6v = 176;
+	int tab7v = 176;
+	int tab8v = 176;
+	int tab9v = 176;
 	
-	boolean Clicked1 = false;
-	boolean Clicked2 = false;
+	int Clicked = 0;
 	
 	GuiButton tabButton;
 	
@@ -29,21 +39,131 @@ public class ChromancyBook extends GuiScreen {
 		drawDefaultBackground();
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
-		mc.renderEngine.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/ChromancyBook_00.png" ));
-		if(Clicked1){
-			tab1v = 214;
-		}else{
-			tab1v = 176;
-		}
-		if(Clicked2){
-			tab2v = 214;
-		}else{
+		switch(Clicked){
+		case 1:
+			tab1v = 194;
 			tab2v = 176;
+			tab3v = 176;
+			tab4v = 176;
+			tab5v = 176;
+			tab6v = 176;
+			tab7v = 176;
+			tab8v = 176;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Light.png";
+			break;
+		case 2:
+			tab1v = 176;
+			tab2v = 194;
+			tab3v = 176;
+			tab4v = 176;
+			tab5v = 176;
+			tab6v = 176;
+			tab7v = 176;
+			tab8v = 176;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Red.png";
+			break;
+		case 3:
+			tab1v = 176;
+			tab2v = 176;
+			tab3v = 194;
+			tab4v = 176;
+			tab5v = 176;
+			tab6v = 176;
+			tab7v = 176;
+			tab8v = 176;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Orange.png";
+			break;
+		case 4:
+			tab1v = 176;
+			tab2v = 176;
+			tab3v = 176;
+			tab4v = 194;
+			tab5v = 176;
+			tab6v = 176;
+			tab7v = 176;
+			tab8v = 176;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Yellow.png";
+			break;
+		case 5:
+			tab1v = 176;
+			tab2v = 176;
+			tab3v = 176;
+			tab4v = 176;
+			tab5v = 194;
+			tab6v = 176;
+			tab7v = 176;
+			tab8v = 176;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Green.png";
+			break;
+		case 6:
+			tab1v = 176;
+			tab2v = 176;
+			tab3v = 176;
+			tab4v = 176;
+			tab5v = 176;
+			tab6v = 194;
+			tab7v = 176;
+			tab8v = 176;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Blue.png";
+			break;
+		case 7:
+			tab1v = 176;
+			tab2v = 176;
+			tab3v = 176;
+			tab4v = 176;
+			tab5v = 176;
+			tab6v = 176;
+			tab7v = 194;
+			tab8v = 176;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Indigo.png";
+			break;
+		case 8:
+			tab1v = 176;
+			tab2v = 176;
+			tab3v = 176;
+			tab4v = 176;
+			tab5v = 176;
+			tab6v = 176;
+			tab7v = 176;
+			tab8v = 194;
+			tab9v = 176;
+			image = "textures/gui/ChromancyBook_Violet.png";
+			break;
+		case 9:
+			tab1v = 176;
+			tab2v = 176;
+			tab3v = 176;
+			tab4v = 176;
+			tab5v = 176;
+			tab6v = 176;
+			tab7v = 176;
+			tab8v = 176;
+			tab9v = 194;
+			image = "textures/gui/ChromancyBook_Black.png";
+			break;
+			
 		}
+		mc.renderEngine.bindTexture(new ResourceLocation(Reference.MODID, image));
 		drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 20, 0, tab1v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 12, guiY + 20 + tabHeight + 1, 0, tab2v, tabWidth, tabHeight);
-		fontRendererObj.drawString("Chromancy", guiX + 10, guiY + 10, 0xFFFFFF);
+		drawTexturedModalRect(guiX + 12, guiY + 18, 0, tab1v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + tabHeight + 1, 21, tab2v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 2) + 1, 42, tab3v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 3) + 1, 63, tab4v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 4) + 1, 84, tab5v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 5) + 1, 105, tab6v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 6) + 1, 126, tab7v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 12, guiY + 18 + (tabHeight * 7) + 1, 147, tab8v, tabWidth, tabHeight);
+		if(DarkLight){
+			drawTexturedModalRect(guiX + 240, guiY + 18 + (tabHeight * 7) + 1, 168, tab9v, tabWidth, tabHeight);
+		}
+		//fontRendererObj.drawString("Chromancy", guiX + 10, guiY + 10, 0xFFFFFF);
 		
 		super.drawScreen(x, y, ticks);
 	
@@ -77,17 +197,33 @@ public class ChromancyBook extends GuiScreen {
 		
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
-		System.out.println("Clicked");
 		
 		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight < y && y < guiY + tabHeight * 2){
-			System.out.println("Clicked1");
-			Clicked1 = true;
-			Clicked2 = false;
+			Clicked = 1;
 		}
 		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight * 2 < y && y < guiY + tabHeight * 3){
-			System.out.println("Clicked2");
-			Clicked1 = false;
-			Clicked2 = true;
+			Clicked = 2;
+		}
+		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight * 3 < y && y < guiY + tabHeight * 4){
+			Clicked = 3;
+		}
+		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight * 4 < y && y < guiY + tabHeight * 5){
+			Clicked = 4;
+		}
+		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight * 5 < y && y < guiY + tabHeight * 6){
+			Clicked = 5;
+		}
+		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight * 6 < y && y < guiY + tabHeight * 7){
+			Clicked = 6;
+		}
+		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight * 7 < y && y < guiY + tabHeight * 8){
+			Clicked = 7;
+		}
+		if(guiX + 12 < x && x < guiX + 12 + tabWidth && guiY + tabHeight * 8 < y && y < guiY + tabHeight * 9){
+			Clicked = 8;
+		}
+		if(guiX + 240 < x && x < guiX + 240 + tabWidth && guiY + tabHeight * 8 < y && y < guiY + tabHeight * 9 && DarkLight){
+			Clicked = 9;
 		}
 		
 	}
