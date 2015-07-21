@@ -12,7 +12,7 @@ public class ChromancyBook extends GuiScreen {
 	
 	String image = "textures/gui/ChromancyBook_Light.png";
 	
-	boolean DarkLight = false;
+	boolean DarkLight = true;
 	
 	int guiWidth = 256;
 	int guiHeight = 173;
