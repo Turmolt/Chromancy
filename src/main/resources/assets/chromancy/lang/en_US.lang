@@ -20,3 +20,4 @@ item.creativeFocus.name=Creative Focus
 tile.lightAmplificationDevice.name=Light Amplification Device
 item.lens.name=Lens
 item.chromancyBookItem.name=Chromancy
+focus.tooltip=It glows faintly

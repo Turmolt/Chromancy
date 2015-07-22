@@ -1,5 +1,7 @@
 package chromancy.core.items;
 
+import java.util.List;
+
 import ibxm.Player;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.command.ICommandSender;
@@ -13,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -372,6 +375,13 @@ public class Focus extends Item{
 		else
 			return false;
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isAdvanced)
+	{
+		tooltip.add(StatCollector.translateToLocal("focus.tooltip"));
+	}
+	
     /**
      * How long it takes to use or consume an item
      */
