@@ -233,7 +233,6 @@ public class Focus extends Item{
 
     				entityarrow.setDamage(entityarrow.getDamage() + (double)6 * 0.5D + 0.5D);
 
-
     				entityarrow.setKnockbackStrength(6);
 
 
