@@ -89,7 +89,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 160;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Yellow.png";
 			break;
 		case 5:
 			tab1v = 160;
