@@ -10,7 +10,7 @@ import net.minecraftforge.client.event.sound.PlaySoundEvent;
 
 public class ChromancyBook extends GuiScreen {
 	
-	String image = "textures/gui/ChromancyBook_01.png";
+	String image = "textures/gui/ChromancyBook_Light.png";
 	
 	boolean DarkLight = true;
 	
@@ -53,7 +53,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 160;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Light.png";
 			break;
 		case 2:
 			tab1v = 160;
@@ -65,7 +65,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 160;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Red.png";
 			break;
 		case 3:
 			tab1v = 160;
@@ -77,7 +77,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 160;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Orange.png";
 			break;
 		case 4:
 			tab1v = 160;
@@ -101,7 +101,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 160;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Green.png";
 			break;
 		case 6:
 			tab1v = 160;
@@ -113,7 +113,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 160;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Blue.png";
 			break;
 		case 7:
 			tab1v = 160;
@@ -125,7 +125,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 180;
 			tab8v = 160;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Indigo.png";
 			break;
 		case 8:
 			tab1v = 160;
@@ -137,7 +137,7 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 180;
 			tab9v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Violet.png";
 			break;
 		case 9:
 			tab1v = 160;
@@ -149,17 +149,15 @@ public class ChromancyBook extends GuiScreen {
 			tab7v = 160;
 			tab8v = 160;
 			tab9v = 180;
-			image = "textures/gui/ChromancyBook_01.png";
+			image = "textures/gui/ChromancyBook_Black.png";
 			break;
 		case 10:
 			tab10v = 180;
 			tab11v = 160;
-			image = "textures/gui/ChromancyBook_01.png";
 			break;
 		case 11:
 			tab10v = 160;
 			tab11v = 180;
-			image = "textures/gui/ChromancyBook_01.png";
 			break;
 			
 		}
