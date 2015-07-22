@@ -5,6 +5,7 @@ import java.util.List;
 import ibxm.Player;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -13,6 +14,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -27,6 +29,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class Focus extends Item{
 	
+	
+	public String[] Colors = {"creative","red","orange","yellow","blue","indigo","violet"};
 	
 	public static enum Color{
 		CREATIVE, RED, BLUE, ORANGE, YELLOW, GREEN, INDIGO, VIOLET, PALE
@@ -50,34 +54,104 @@ public class Focus extends Item{
 		setCreativeTab(ChromancyCore.chromancyTab);
 		setUnlocalizedName(focusType);
 		setTextureName("chromancy:" + focusType);
-		icons = new IIcon[3];
+		icons = new IIcon[8];
 		this.energy = 0;
 		this.maxEnergy = max;
 		this.setMaxDamage(maxEnergy);
 		this.recharging = false;
-		if(focusType == "creativeFocus")
-		{
-			color = Color.CREATIVE;
-			isCreative = true;
-		}
-		else if(focusType == "redFocus")
-			color = Color.RED;
-		else if(focusType == "orangeFocus")
-			color = Color.ORANGE;
-		else if(focusType == "yellowFocus")
-			color = Color.YELLOW;
-		else if(focusType == "greenFocus")
-			color = Color.GREEN;
-		else if(focusType == "blueFocus")
-			color = Color.BLUE;
-		else if(focusType == "indigoFocus")
-			color = Color.INDIGO;
-		else if(focusType == "violetFocus")
-			color = Color.VIOLET;
 		
+		switch(focusType){
+			case "creativeFocus":
+				color = Color.CREATIVE;
+				isCreative = true;
+				break;
+			case "redFocus":
+				color = Color.RED;
+				isCreative = false;
+				break;
+			case "orangeFocus":
+				color = Color.ORANGE;
+				isCreative = false;
+				break;
+			case "yellowFocus":
+				color = Color.YELLOW;
+				isCreative = false;
+				break;
+			case "greenFocus":
+				color = Color.GREEN;
+				isCreative = false;
+				break;
+			case "blueFocus":
+				color = Color.BLUE;
+				isCreative = false;
+				break;
+			case "indigoFocus":
+				color = Color.INDIGO;
+				isCreative = false;
+				break;
+			case "violetFocus":
+				color = Color.VIOLET;
+				isCreative = false;
+				break;
+			default:
+				break;
+				
+		}
+
 			
 			
 	}
+
+	
+    // This is a fun method which allows us to run some code when our item is
+    // shown in a creative tab. I am going to use it to add all the brain 
+    // types.
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, List itemList) 
+    {
+        // This creates a loop with a counter. It will go through once for
+        // every listing in brainTypes,  and gives us a number associated 
+        // with each listing.
+        for (int pos = 0; pos < 7; pos++) 
+        {
+            // This creates a new ItemStack instance. The item parameter 
+            // supplied is this item.
+            ItemStack focusStack = new ItemStack(item);
+            // By default, a new ItemStack does not have any nbt compound data. 
+            // We need to give it some.
+            focusStack.setTagCompound(new NBTTagCompound());
+            // Now we set the type of the item, brainType is the key, and 
+            // brainTypes[pos] is grabbing a
+            // entry from the brainTypes array.
+            focusStack.getTagCompound().setString("focusType", Colors[pos]);
+            // And this adds it to the itemList, which is a list of all items
+            // in the creative tab.
+            itemList.add(focusStack);
+        }
+    }
+    // This method allows us to have different language translation keys for 
+    // each item we add.
+    @Override
+    public String getUnlocalizedName(ItemStack stack) 
+    {
+        // This makes sure that the stack has a tag compound. This is how data 
+        // is stored on items.
+        if (stack.hasTagCompound()) 
+        {
+            // This is the object holding all of the item data.
+            NBTTagCompound itemData = stack.getTagCompound();
+            // This checks to see if the item has data stored under the 
+            // brainType key.
+            if (itemData.hasKey("focusType"))
+            {
+                // This retrieves data from the brainType key and uses it in
+                // the return value
+                return "item." + itemData.getString("focusType") + "Focus";
+            }
+        }
+        // This will be used if the item is obtained without nbt data on it.
+        return "item.nullFocus";
+     }
 	
 
     
@@ -198,7 +272,11 @@ public class Focus extends Item{
 	{
 		icons[0] = icon.registerIcon(Reference.MODID + ":creativeFocus");
 		icons[1] = icon.registerIcon(Reference.MODID + ":redFocus");
-		icons[2] = icon.registerIcon(Reference.MODID + ":blueFocus");
+		icons[2] = icon.registerIcon(Reference.MODID + ":orangeFocus");
+		icons[3] = icon.registerIcon(Reference.MODID + ":yellowFocus");
+		icons[4] = icon.registerIcon(Reference.MODID + ":blueFocus");
+		icons[5] = icon.registerIcon(Reference.MODID + ":indigoFocus");
+		icons[6] = icon.registerIcon(Reference.MODID + ":violetFocus");
 	}
 	   
     /**
@@ -294,34 +372,80 @@ public class Focus extends Item{
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
     {
-		switch(this.color){
-			case CREATIVE:
-				return icons[0];
-			case RED:
-				return icons[1];
-			case BLUE:
-				return icons[2];
-			default:
-				break;
-		}
-        return getIcon(stack, renderPass);
+		if (stack.hasTagCompound()) 
+        {
+            // This is the object holding all of the item data.
+            NBTTagCompound itemData = stack.getTagCompound();
+            // This checks to see if the item has data stored under the 
+            // brainType key.
+            if (itemData.hasKey("focusType"))
+            {
+            	if(itemData.getString("focusType")=="creative")
+            		return icons[0];
+            	switch(itemData.getString("focusType")){
+            		case "creative":
+            			return icons[0];
+            		case "red":
+            			return icons[1];
+            		case "orange":
+            			return icons[2];
+            		case "yellow":
+            			return icons[3];
+            		case "blue":
+            			return icons[4];
+            		case "indigo":
+            			return icons[5];
+            		case "violet":
+            			return icons[6];
+            		default:
+            			return getIcon(stack, renderPass);
+            	}
+
+                // This retrieves data from the brainType key and uses it in
+                // the return value
+            }
+        }
+		return getIcon(stack, renderPass);
     }
 	
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int pass)
     {
 		
-		switch(color){
-		case CREATIVE:
-			return icons[0];
-		case RED:
-			return icons[1];
-		case BLUE:
-			return icons[2];
-		default:
-			break;
-	}
-    return icons[0];
+		if (stack.hasTagCompound()) 
+        {
+            // This is the object holding all of the item data.
+            NBTTagCompound itemData = stack.getTagCompound();
+            // This checks to see if the item has data stored under the 
+            // brainType key.
+            if (itemData.hasKey("focusType"))
+            {
+            	if(itemData.getString("focusType")=="creative")
+            		return icons[0];
+            	switch(itemData.getString("focusType")){
+            		case "creative":
+            			return icons[0];
+            		case "red":
+            			return icons[1];
+            		case "orange":
+            			return icons[2];
+            		case "yellow":
+            			return icons[3];
+            		case "blue":
+            			return icons[4];
+            		case "indigo":
+            			return icons[5];
+            		case "violet":
+            			return icons[6];
+            		default:
+            			return icons[0];
+            	}
+
+                // This retrieves data from the brainType key and uses it in
+                // the return value
+            }
+        }
+		return icons[0];
 		
 		
     }
@@ -330,19 +454,42 @@ public class Focus extends Item{
      * Returns the icon index of the stack given as argument.
      */
     @SideOnly(Side.CLIENT)
-    public IIcon getIconIndex(ItemStack p_77650_1_)
+    public IIcon getIconIndex(ItemStack stack)
     {
-    	switch(color){
-    		case CREATIVE:
-    			return icons[0];
-    		case RED:
-    			return icons[1];
-    		case BLUE:
-    			return icons[2];
-    		default:
-    			break;
-    	}
-        return icons[0];
+    	if (stack.hasTagCompound()) 
+        {
+            // This is the object holding all of the item data.
+            NBTTagCompound itemData = stack.getTagCompound();
+            // This checks to see if the item has data stored under the 
+            // brainType key.
+            if (itemData.hasKey("focusType"))
+            {
+            	if(itemData.getString("focusType")=="creative")
+            		return icons[0];
+            	switch(itemData.getString("focusType")){
+	            	case "creative":
+	            		return icons[0];
+	            	case "red":
+	            		return icons[1];
+	            	case "orange":
+	            		return icons[2];
+	            	case "yellow":
+	            		return icons[3];
+	            	case "blue":
+	            		return icons[4];
+	            	case "indigo":
+	            		return icons[5];
+	            	case "violet":
+	            		return icons[6];
+            		default:
+            			return icons[0];
+            	}
+
+                // This retrieves data from the brainType key and uses it in
+                // the return value
+            }
+        }
+		return icons[0];
     }
 	@SideOnly(Side.CLIENT)
     public boolean shouldRotateAroundWhenRendering()
