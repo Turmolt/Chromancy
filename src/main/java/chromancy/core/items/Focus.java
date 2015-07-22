@@ -32,7 +32,7 @@ public class Focus extends Item{
 	
 	public String[] Colors = {"creative","red","orange","green","yellow","blue","indigo","violet"};
 	
-	public static enum Color{
+	public enum Color{
 		CREATIVE, RED, BLUE, ORANGE, YELLOW, GREEN, INDIGO, VIOLET, PALE
 	}
 	
@@ -41,12 +41,12 @@ public class Focus extends Item{
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 	
-	public static int energy;
-	public static int maxEnergy;
-	public static int ticks = 0;
-	public static int tocks = 0;
-	public static boolean recharging;
-	public static int incEnergy;
+	public int energy;
+	public int maxEnergy;
+	public int ticks = 0;
+	public int tocks = 0;
+	public boolean recharging;
+	public int incEnergy;
 	
 	public Focus(String focusType, int max)
 	{
@@ -59,7 +59,7 @@ public class Focus extends Item{
 		this.maxEnergy = max;
 		this.setMaxDamage(maxEnergy);
 		this.recharging = false;
-		
+
 		switch(focusType){
 			case "creativeFocus":
 				color = Color.CREATIVE;
@@ -95,7 +95,7 @@ public class Focus extends Item{
 				break;
 			default:
 				break;
-				
+
 		}
 
 			
@@ -322,24 +322,24 @@ public class Focus extends Item{
 			{
 				if(isCreative)
 				{
-					switch(this.color){
-						case CREATIVE:
-							this.color = Color.RED;
-							System.out.println("To Red");
-							break;
-						case RED:
-							this.color = Color.BLUE;
-							System.out.println("To Blue");
-							break;
-						case BLUE:
-							this.color = Color.CREATIVE;
-							System.out.println("To Creative");
-							break;
-						default:
-							System.out.println("oops");
-							break;
-					}
-			
+//					switch(this.color){
+//						case CREATIVE:
+//							this.color = Color.RED;
+//							System.out.println("To Red");
+//							break;
+//						case RED:
+//							this.color = Color.BLUE;
+//							System.out.println("To Blue");
+//							break;
+//						case BLUE:
+//							this.color = Color.CREATIVE;
+//							System.out.println("To Creative");
+//							break;
+//						default:
+//							System.out.println("oops");
+//							break;
+//					}
+
 				}
 			}
 			this.ticks=5;
@@ -347,7 +347,7 @@ public class Focus extends Item{
 		return p1;
 	}
 	
-	public void onUpdate(ItemStack p_77663_1_, World currentWorld, Entity currentPlayer, int p_77663_4_, boolean p_77663_5_) {
+	public void onUpdate(ItemStack stack, World currentWorld, Entity currentPlayer, int p_77663_4_, boolean p_77663_5_) {
 		//tick/tock goes down by 1 per tick. for use as in game timer
 		if(this.ticks > 0)
 			this.ticks-=1;
@@ -356,7 +356,7 @@ public class Focus extends Item{
 		
 		//also checks for this.recharging so my function works too
 		if(this.energy < this.maxEnergy)
-			if(CanSeeSun(currentPlayer, currentWorld) || this.recharging){
+			if(CanSeeSun(stack, currentPlayer, currentWorld) || this.recharging){
 				if(this.energy<this.maxEnergy)
 					this.energy+=incEnergy;
 				else if(this.energy>this.maxEnergy)
@@ -479,13 +479,15 @@ public class Focus extends Item{
     }
 	
 	// Check to see if player is on top world block and sun is out
-	public static boolean CanSeeSun(Entity currentPlayer, World world){
+	public static boolean CanSeeSun(ItemStack stack, Entity currentPlayer, World world){
 		//added energy < maxEnergy so it doesnt try to charge when full
 		//also added !recharging so that if it is recharging using my method it wont also charge using yours at the same time
-		if(energy < maxEnergy&&!recharging && ((world.getCelestialAngle(0) < .25) || (world.getCelestialAngle(0) > .75)) && (world.getRainStrength(0) < 0.25))
+		Focus f = (Focus)stack.getItem();
+		if(f.energy < f.maxEnergy&&!f.recharging && ((world.getCelestialAngle(0) < .25) ||
+				(world.getCelestialAngle(0) > .75)) && (world.getRainStrength(0) < 0.25))
 		{
 			//set charge rate
-			incEnergy=1;
+			f.incEnergy=1;
 			ChunkCoordinates playerCoord = ((ICommandSender) currentPlayer).getPlayerCoordinates();
 
 			int x = playerCoord.posX;
@@ -493,12 +495,7 @@ public class Focus extends Item{
 			int z = playerCoord.posZ;
 			int highestWorldY = world.getHeightValue(x, z);
 		
-			if( y > highestWorldY){
-				return true;
-			}
-			else{
-				return false;
-			}
+			return  (y > highestWorldY);
 		}
 		else
 			return false;
