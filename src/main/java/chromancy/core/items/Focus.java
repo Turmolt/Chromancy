@@ -30,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Focus extends Item{
 	
 	
-	public String[] Colors = {"creative","red","orange","yellow","blue","indigo","violet"};
+	public String[] Colors = {"creative","red","orange","green","yellow","blue","indigo","violet"};
 	
 	public static enum Color{
 		CREATIVE, RED, BLUE, ORANGE, YELLOW, GREEN, INDIGO, VIOLET, PALE
@@ -112,7 +112,7 @@ public class Focus extends Item{
         // This creates a loop with a counter. It will go through once for
         // every listing in brainTypes,  and gives us a number associated 
         // with each listing.
-        for (int pos = 0; pos < 7; pos++) 
+        for (int pos = 0; pos < 8; pos++) 
         {
             // This creates a new ItemStack instance. The item parameter 
             // supplied is this item.
@@ -165,90 +165,92 @@ public class Focus extends Item{
 	/**
      * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
      */
-    public void onPlayerStoppedUsing(ItemStack p1, World p_77615_2_, EntityPlayer p_77615_3_, int p_77615_4_)
+    
+    public void onPlayerStoppedUsing(ItemStack p1, World world, EntityPlayer p_77615_3_, int p_77615_4_)
     {
     	
-        int j = this.getMaxItemUseDuration(p1) - p_77615_4_;
+    	int j = this.getMaxItemUseDuration(p1) - p_77615_4_;
 
-        //Create new projectile event
-        ArrowLooseEvent event = new ArrowLooseEvent(p_77615_3_, p1, j);
-        MinecraftForge.EVENT_BUS.post(event);
-        if (event.isCanceled())
-        {
-            return;
-        }
-        j = event.charge;
+    	//Create new projectile event
+    	if(!world.isRemote)
+    	{
+    		ArrowLooseEvent event = new ArrowLooseEvent(p_77615_3_, p1, j);
+    		MinecraftForge.EVENT_BUS.post(event);
+    		if (event.isCanceled())
+    		{
+    			return;
+    		}
+    		j = event.charge;
 
-        boolean flag = true;
-        boolean fire = false;
-        
-        if (flag)
-        {
-        	
-            float f = (float)j / 20.0F;
-            f = (f * f + f * 2.0F) / 3.0F;
+    		boolean flag = true;
+    		boolean fire = false;
 
-            
+    		if (flag)
+    		{
 
-            if (f > 1.0F)
-            {
-                f = 1.0F;
-            }
-            
-            //reduce energy by 5 if projectile is fired. if not enough energy, return
-            if(this.tocks == 0)
-            {
-            	if(this.energy>0)
-            	{
-            		fire = true;
-            		this.energy -= 5;
-            	}
-            	else if(this.energy <= 0)
-            	{
-            		System.out.println("Out of Energy");
-            		this.energy=0;
-            		return;
-            	}
-            	if (this.recharging)
-            		this.recharging = false;
-            	this.tocks = 2;
-            	System.out.println(this.energy + " " + this.maxEnergy);
-            	
-            	
-            	p1.setItemDamage(this.energy);
-            }
-            
-            //Has arrow been set to fire?
-            if(fire)
-            {
-            	if(this.tocks > 0)
-            		System.out.println("Error");
-            	fire = false;
-            	EntityArrow entityarrow = new EntityArrow(p_77615_2_, p_77615_3_, 1.0f * 2.0F);
-
-            	entityarrow.setIsCritical(true);
-
-            	if(color == Color.RED)
-            		entityarrow.setFire(100);
+    			float f = (float)j / 20.0F;
+    			f = (f * f + f * 2.0F) / 3.0F;
 
 
 
-            	entityarrow.setDamage(entityarrow.getDamage() + (double)6 * 0.5D + 0.5D);
+    			if (f > 1.0F)
+    			{
+    				f = 1.0F;
+    			}
+
+    			//reduce energy by 5 if projectile is fired. if not enough energy, return
+    			if(this.tocks == 0)
+    			{
+    				if(this.energy>0)
+    				{
+    					fire = true;
+    					this.energy -= 5;
+    				}
+    				else if(this.energy <= 0)
+    				{
+    					System.out.println("Out of Energy");
+    					this.energy=0;
+    					return;
+    				}
+    				if (this.recharging)
+    					this.recharging = false;
+    				this.tocks = 2;
+    				System.out.println(this.energy + " " + this.maxEnergy);
 
 
-            	entityarrow.setKnockbackStrength(6);
+    				p1.setItemDamage(this.energy);
+    			}
+
+    			//Has arrow been set to fire?
+    			if(fire)
+    			{
+    				fire = false;
+    				EntityArrow entityarrow = new EntityArrow(world, p_77615_3_, 1.0f * 2.0F);
+
+    				entityarrow.setIsCritical(true);
+
+    				if(color == Color.RED)
+    					entityarrow.setFire(100);
 
 
-            	p_77615_2_.playSoundAtEntity(p_77615_3_, "fire.fire", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-            	System.out.println("GG");
-                p_77615_2_.spawnEntityInWorld(entityarrow);
-                System.out.println("FIRE!");
-        		
-            }
 
-            
+    				entityarrow.setDamage(entityarrow.getDamage() + (double)6 * 0.5D + 0.5D);
 
-        }
+
+    				entityarrow.setKnockbackStrength(6);
+
+
+    				world.playSoundAtEntity(p_77615_3_, "fire.fire", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+    				System.out.println("GG");
+    				world.spawnEntityInWorld(entityarrow);
+    				System.out.println("FIRE!");
+
+    			}
+
+
+
+    		}
+    	}
         
 
     }
@@ -274,9 +276,10 @@ public class Focus extends Item{
 		icons[1] = icon.registerIcon(Reference.MODID + ":redFocus");
 		icons[2] = icon.registerIcon(Reference.MODID + ":orangeFocus");
 		icons[3] = icon.registerIcon(Reference.MODID + ":yellowFocus");
-		icons[4] = icon.registerIcon(Reference.MODID + ":blueFocus");
-		icons[5] = icon.registerIcon(Reference.MODID + ":indigoFocus");
-		icons[6] = icon.registerIcon(Reference.MODID + ":violetFocus");
+		icons[4] = icon.registerIcon(Reference.MODID + ":greenFocus");
+		icons[5] = icon.registerIcon(Reference.MODID + ":blueFocus");
+		icons[6] = icon.registerIcon(Reference.MODID + ":indigoFocus");
+		icons[7] = icon.registerIcon(Reference.MODID + ":violetFocus");
 	}
 	   
     /**
@@ -372,45 +375,58 @@ public class Focus extends Item{
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
     {
-		if (stack.hasTagCompound()) 
-        {
-            // This is the object holding all of the item data.
-            NBTTagCompound itemData = stack.getTagCompound();
-            // This checks to see if the item has data stored under the 
-            // brainType key.
-            if (itemData.hasKey("focusType"))
-            {
-            	if(itemData.getString("focusType")=="creative")
-            		return icons[0];
-            	switch(itemData.getString("focusType")){
-            		case "creative":
-            			return icons[0];
-            		case "red":
-            			return icons[1];
-            		case "orange":
-            			return icons[2];
-            		case "yellow":
-            			return icons[3];
-            		case "blue":
-            			return icons[4];
-            		case "indigo":
-            			return icons[5];
-            		case "violet":
-            			return icons[6];
-            		default:
-            			return getIcon(stack, renderPass);
-            	}
-
-                // This retrieves data from the brainType key and uses it in
-                // the return value
-            }
-        }
-		return getIcon(stack, renderPass);
+		switch(getType(stack)){
+        case "creative":
+        	return icons[0];
+        case "red":
+        	return icons[1];
+        case "orange":
+        	return icons[2];
+        case "yellow":
+       		return icons[3];
+       	case "green":
+       		return icons[4];
+       	case "blue":
+       		return icons[5];
+       	case "indigo":
+       		return icons[6];
+       	case "violet":
+       		return icons[7];
+    	default:
+    		return icons[0];
+    	}
     }
 	
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int pass)
     {
+		switch(getType(stack)){
+        case "creative":
+        	return icons[0];
+        case "red":
+        	return icons[1];
+        case "orange":
+        	return icons[2];
+        case "yellow":
+       		return icons[3];
+       	case "green":
+       		return icons[4];
+       	case "blue":
+       		return icons[5];
+       	case "indigo":
+       		return icons[6];
+       	case "violet":
+       		return icons[7];
+    	default:
+    		return icons[0];
+    	}
+		
+		
+    }
+	
+	public String getType(ItemStack stack)
+	{
+		
 		
 		if (stack.hasTagCompound()) 
         {
@@ -420,35 +436,14 @@ public class Focus extends Item{
             // brainType key.
             if (itemData.hasKey("focusType"))
             {
-            	if(itemData.getString("focusType")=="creative")
-            		return icons[0];
-            	switch(itemData.getString("focusType")){
-            		case "creative":
-            			return icons[0];
-            		case "red":
-            			return icons[1];
-            		case "orange":
-            			return icons[2];
-            		case "yellow":
-            			return icons[3];
-            		case "blue":
-            			return icons[4];
-            		case "indigo":
-            			return icons[5];
-            		case "violet":
-            			return icons[6];
-            		default:
-            			return icons[0];
-            	}
-
-                // This retrieves data from the brainType key and uses it in
-                // the return value
+            	return itemData.getString("focusType");
             }
         }
-		return icons[0];
+		return "Null";
 		
 		
-    }
+		
+	}
 	
 	 /**
      * Returns the icon index of the stack given as argument.
@@ -456,40 +451,26 @@ public class Focus extends Item{
     @SideOnly(Side.CLIENT)
     public IIcon getIconIndex(ItemStack stack)
     {
-    	if (stack.hasTagCompound()) 
-        {
-            // This is the object holding all of the item data.
-            NBTTagCompound itemData = stack.getTagCompound();
-            // This checks to see if the item has data stored under the 
-            // brainType key.
-            if (itemData.hasKey("focusType"))
-            {
-            	if(itemData.getString("focusType")=="creative")
+            switch(getType(stack)){
+	            case "creative":
+	            	return icons[0];
+	            case "red":
+	            	return icons[1];
+	            case "orange":
+	            	return icons[2];
+	            case "yellow":
+	           		return icons[3];
+	           	case "green":
+	           		return icons[4];
+	           	case "blue":
+	           		return icons[5];
+	           	case "indigo":
+	           		return icons[6];
+	           	case "violet":
+	           		return icons[7];
+            	default:
             		return icons[0];
-            	switch(itemData.getString("focusType")){
-	            	case "creative":
-	            		return icons[0];
-	            	case "red":
-	            		return icons[1];
-	            	case "orange":
-	            		return icons[2];
-	            	case "yellow":
-	            		return icons[3];
-	            	case "blue":
-	            		return icons[4];
-	            	case "indigo":
-	            		return icons[5];
-	            	case "violet":
-	            		return icons[6];
-            		default:
-            			return icons[0];
             	}
-
-                // This retrieves data from the brainType key and uses it in
-                // the return value
-            }
-        }
-		return icons[0];
     }
 	@SideOnly(Side.CLIENT)
     public boolean shouldRotateAroundWhenRendering()
