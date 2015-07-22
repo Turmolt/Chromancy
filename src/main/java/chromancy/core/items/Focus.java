@@ -183,7 +183,6 @@ public class Focus extends Item{
     		j = event.charge;
 
     		boolean flag = true;
-    		boolean fire = false;
 
     		if (flag)
     		{
@@ -203,7 +202,6 @@ public class Focus extends Item{
     			{
     				if(this.energy>0)
     				{
-    					fire = true;
     					this.energy -= 5;
     				}
     				else if(this.energy <= 0)
@@ -222,16 +220,15 @@ public class Focus extends Item{
     			}
 
     			//Has arrow been set to fire?
-    			if(fire)
-    			{
-    				fire = false;
+
     				EntityArrow entityarrow = new EntityArrow(world, p_77615_3_, 1.0f * 2.0F);
 
     				entityarrow.setIsCritical(true);
 
-    				if(color == Color.RED)
-    					entityarrow.setFire(100);
-
+    				if(getType(p1) == "red") {
+						entityarrow.setFire(100);
+						System.out.println("yaas");
+					}
 
 
     				entityarrow.setDamage(entityarrow.getDamage() + (double)6 * 0.5D + 0.5D);
@@ -245,7 +242,7 @@ public class Focus extends Item{
     				world.spawnEntityInWorld(entityarrow);
     				System.out.println("FIRE!");
 
-    			}
+
 
 
 
@@ -435,7 +432,7 @@ public class Focus extends Item{
             // This checks to see if the item has data stored under the 
             // brainType key.
             if (itemData.hasKey("focusType"))
-            {
+			{
             	return itemData.getString("focusType");
             }
         }
