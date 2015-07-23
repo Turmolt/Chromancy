@@ -20,18 +20,18 @@ public class ChromancyBook extends GuiScreen {
 	int tabWidth = 20;
 	int tabHeight = 20;
 	
-	int tab1v = 160;
-	int tab2v = 160;
-	int tab3v = 160;
-	int tab4v = 160;
-	int tab5v = 160;
-	int tab6v = 160;
-	int tab7v = 160;
-	int tab8v = 160;
-	int tab9v = 160;
-	int tab10v = 160;
-	int tab11v = 160;
-	
+	int LightTab = 160;
+	int RedTab = 160;
+	int OrangeTab = 160;
+	int YellowTab = 160;
+	int GreenTab = 160;
+	int BlueTab = 160;
+	int IndigoTab = 160;
+	int VioletTab = 160;
+	int DarkTab = 160;
+	int SpellTab = 160;
+	int CraftingTab = 160;
+	int Slot1 = 200;
 	int Clicked = 0;
 	
 	GuiButton tabButton;
@@ -42,139 +42,22 @@ public class ChromancyBook extends GuiScreen {
 		drawDefaultBackground();
 		int guiX = (width - guiWidth) / 2;
 		int guiY = (height - guiHeight) / 2;
-		switch(Clicked){
-		case 1:
-			tab1v = 180;
-			tab2v = 160;
-			tab3v = 160;
-			tab4v = 160;
-			tab5v = 160;
-			tab6v = 160;
-			tab7v = 160;
-			tab8v = 160;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Light.png";
-			break;
-		case 2:
-			tab1v = 160;
-			tab2v = 180;
-			tab3v = 160;
-			tab4v = 160;
-			tab5v = 160;
-			tab6v = 160;
-			tab7v = 160;
-			tab8v = 160;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Red.png";
-			break;
-		case 3:
-			tab1v = 160;
-			tab2v = 160;
-			tab3v = 180;
-			tab4v = 160;
-			tab5v = 160;
-			tab6v = 160;
-			tab7v = 160;
-			tab8v = 160;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Orange.png";
-			break;
-		case 4:
-			tab1v = 160;
-			tab2v = 160;
-			tab3v = 160;
-			tab4v = 180;
-			tab5v = 160;
-			tab6v = 160;
-			tab7v = 160;
-			tab8v = 160;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Yellow.png";
-			break;
-		case 5:
-			tab1v = 160;
-			tab2v = 160;
-			tab3v = 160;
-			tab4v = 160;
-			tab5v = 180;
-			tab6v = 160;
-			tab7v = 160;
-			tab8v = 160;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Green.png";
-			break;
-		case 6:
-			tab1v = 160;
-			tab2v = 160;
-			tab3v = 160;
-			tab4v = 160;
-			tab5v = 160;
-			tab6v = 180;
-			tab7v = 160;
-			tab8v = 160;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Blue.png";
-			break;
-		case 7:
-			tab1v = 160;
-			tab2v = 160;
-			tab3v = 160;
-			tab4v = 160;
-			tab5v = 160;
-			tab6v = 160;
-			tab7v = 180;
-			tab8v = 160;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Indigo.png";
-			break;
-		case 8:
-			tab1v = 160;
-			tab2v = 160;
-			tab3v = 160;
-			tab4v = 160;
-			tab5v = 160;
-			tab6v = 160;
-			tab7v = 160;
-			tab8v = 180;
-			tab9v = 160;
-			image = "textures/gui/ChromancyBook_Violet.png";
-			break;
-		case 9:
-			tab1v = 160;
-			tab2v = 160;
-			tab3v = 160;
-			tab4v = 160;
-			tab5v = 160;
-			tab6v = 160;
-			tab7v = 160;
-			tab8v = 160;
-			tab9v = 180;
-			image = "textures/gui/ChromancyBook_Black.png";
-			break;
-		case 10:
-			tab10v = 180;
-			tab11v = 160;
-			break;
-		case 11:
-			tab10v = 160;
-			tab11v = 180;
-			break;
-			
-		}
+		getTab();
 		mc.renderEngine.bindTexture(new ResourceLocation(Reference.MODID, image));
 		drawTexturedModalRect(guiX, guiY, 0, 0, guiWidth, guiHeight);
-		drawTexturedModalRect(guiX, guiY, 0, tab1v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX, guiY + tabHeight + 1, 20, tab2v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX, guiY + (tabHeight * 2) + 2, 40, tab3v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX, guiY + (tabHeight * 3) + 3, 60, tab4v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX, guiY + (tabHeight * 4) + 4, 80, tab5v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX, guiY + (tabHeight * 5) + 5, 100, tab6v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX, guiY + (tabHeight * 6) + 6, 120, tab7v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX, guiY + (tabHeight * 7) + 7, 140, tab8v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 240, guiY, 180, tab10v, tabWidth, tabHeight);
-		drawTexturedModalRect(guiX + 240, guiY + tabHeight + 1, 200, tab11v, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY, 0, LightTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY + tabHeight + 1, 20, RedTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY + (tabHeight * 2) + 2, 40, OrangeTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY + (tabHeight * 3) + 3, 60, YellowTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY + (tabHeight * 4) + 4, 80, GreenTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY + (tabHeight * 5) + 5, 100, BlueTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY + (tabHeight * 6) + 6, 120, IndigoTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX, guiY + (tabHeight * 7) + 7, 140, VioletTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 240, guiY, 180, SpellTab, tabWidth, tabHeight);
+		drawTexturedModalRect(guiX + 240, guiY + tabHeight + 1, 200, CraftingTab, tabWidth, tabHeight);
+		drawTexturedModalRect(200, guiY + tabHeight, 0, Slot1, tabWidth, tabHeight);
 		if(DarkLight){
-			drawTexturedModalRect(guiX + 240, guiY + (tabHeight * 7) + 7, 160, tab9v, tabWidth, tabHeight);
+			drawTexturedModalRect(guiX + 240, guiY + (tabHeight * 7) + 7, 160, DarkTab, tabWidth, tabHeight);
 		}
 		//fontRendererObj.drawString("Chromancy", guiX + 10, guiY + 10, 0xFFFFFF);
 		
@@ -182,6 +65,7 @@ public class ChromancyBook extends GuiScreen {
 	
 	}
 	
+	/*
 	@Override
 	public void initGui(){
 		int guiX = (width - guiWidth) / 2;
@@ -202,6 +86,7 @@ public class ChromancyBook extends GuiScreen {
 		}
 		super.actionPerformed(button);
 	}
+	*/
 	
 	
 	@Override
@@ -245,7 +130,128 @@ public class ChromancyBook extends GuiScreen {
 		if(guiX + 240 < x && x < guiX + 240 + tabWidth && guiY + tabHeight < y && y < guiY + tabHeight * 2){
 			Clicked = 11;
 		}
-		
+	}
+	
+	public void getTab(){
+		switch(Clicked){
+		case 1:
+			LightTab = 180;
+			RedTab = 160;
+			OrangeTab = 160;
+			YellowTab = 160;
+			GreenTab = 160;
+			BlueTab = 160;
+			IndigoTab = 160;
+			VioletTab = 160;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Light.png";
+			break;
+		case 2:
+			LightTab = 160;
+			RedTab = 180;
+			OrangeTab = 160;
+			YellowTab = 160;
+			GreenTab = 160;
+			BlueTab = 160;
+			IndigoTab = 160;
+			VioletTab = 160;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Red.png";
+			break;
+		case 3:
+			LightTab = 160;
+			RedTab = 160;
+			OrangeTab = 180;
+			YellowTab = 160;
+			GreenTab = 160;
+			BlueTab = 160;
+			IndigoTab = 160;
+			VioletTab = 160;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Orange.png";
+			break;
+		case 4:
+			LightTab = 160;
+			RedTab = 160;
+			OrangeTab = 160;
+			YellowTab = 180;
+			GreenTab = 160;
+			BlueTab = 160;
+			IndigoTab = 160;
+			VioletTab = 160;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Yellow.png";
+			break;
+		case 5:
+			LightTab = 160;
+			RedTab = 160;
+			OrangeTab = 160;
+			YellowTab = 160;
+			GreenTab = 180;
+			BlueTab = 160;
+			IndigoTab = 160;
+			VioletTab = 160;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Green.png";
+			break;
+		case 6:
+			LightTab = 160;
+			RedTab = 160;
+			OrangeTab = 160;
+			YellowTab = 160;
+			GreenTab = 160;
+			BlueTab = 180;
+			IndigoTab = 160;
+			VioletTab = 160;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Blue.png";
+			break;
+		case 7:
+			LightTab = 160;
+			RedTab = 160;
+			OrangeTab = 160;
+			YellowTab = 160;
+			GreenTab = 160;
+			BlueTab = 160;
+			IndigoTab = 180;
+			VioletTab = 160;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Indigo.png";
+			break;
+		case 8:
+			LightTab = 160;
+			RedTab = 160;
+			OrangeTab = 160;
+			YellowTab = 160;
+			GreenTab = 160;
+			BlueTab = 160;
+			IndigoTab = 160;
+			VioletTab = 180;
+			DarkTab = 160;
+			image = "textures/gui/ChromancyBook_Violet.png";
+			break;
+		case 9:
+			LightTab = 160;
+			RedTab = 160;
+			OrangeTab = 160;
+			YellowTab = 160;
+			GreenTab = 160;
+			BlueTab = 160;
+			IndigoTab = 160;
+			VioletTab = 160;
+			DarkTab = 180;
+			image = "textures/gui/ChromancyBook_Black.png";
+			break;
+		case 10:
+			SpellTab = 180;
+			CraftingTab = 160;
+			break;
+		case 11:
+			SpellTab = 160;
+			CraftingTab = 180;
+			break;
+			
+		}
 	}
 	
 }
