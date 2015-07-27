@@ -2,6 +2,7 @@ package chromancy.core.items;
 
 import java.util.List;
 
+import chromancy.core.lightEnergy.ILightItem;
 import ibxm.Player;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.command.ICommandSender;
@@ -27,11 +28,13 @@ import chromancy.core.help.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Focus extends Item{
+public class Focus extends Item implements ILightItem{
 	
 	
 	public String[] Colors = {"creative","red","orange","green","yellow","blue","indigo","violet"};
-	
+
+
+
 	public enum Color{
 		CREATIVE, RED, BLUE, ORANGE, YELLOW, GREEN, INDIGO, VIOLET, PALE
 	}
@@ -97,11 +100,28 @@ public class Focus extends Item{
 				break;
 
 		}
-
-			
-			
 	}
 
+
+	@Override
+	public int receiveLight(ItemStack container, int maxReceive, boolean simulate) {
+		return 0;
+	}
+
+	@Override
+	public int extractLight(ItemStack container, int maxExtract, boolean simulate) {
+		return 0;
+	}
+
+	@Override
+	public int getLightStored(ItemStack container) {
+		return 0;
+	}
+
+	@Override
+	public int getMaxLightStored(ItemStack container) {
+		return 0;
+	}
 	
     // This is a fun method which allows us to run some code when our item is
     // shown in a creative tab. I am going to use it to add all the brain 
